@@ -24,7 +24,9 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "bootstrap-select": "^1.13.16",
         "grapesjs": "^0.16.2",
-        "grapesjs-preset-webpage": "^0.1.11"
+        "grapesjs-preset-webpage": "^0.1.11",
+        "mdbootstrap": "^4.17.0"
     }
 }

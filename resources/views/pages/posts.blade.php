@@ -2,20 +2,12 @@
 
 @section('content')
 <div class="flex-center position-ref full-height">
-    <div class="content">
-        <div class="title m-b-md">
-            Posts Page
-        </div>
-
-        <div class="links">
-            <a href="https://laravel.com/docs">Docs</a>
-            <a href="https://laracasts.com">Laracasts</a>
-            <a href="https://laravel-news.com">News</a>
-            <a href="https://blog.laravel.com">Blog</a>
-            <a href="https://nova.laravel.com">Nova</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
-        </div>
-    </div>
+	<div class="container pt-5" style="padding-top: 5rem !important;">
+		<div class="page-background-image"></div>
+	    <h1>{{ $post->getTranslatedAttribute('title', app()->getLocale()) }}</h1>
+	    <div class="page-content__wrap">
+	      {!! $post->getTranslatedAttribute('body', app()->getLocale()) !!}
+	    </div>
+	</div>
 </div>
 @endsection

@@ -11,23 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-	// return redirect(app()->getLocale());
-	return view('pages.home');
-});
+Route::get('/', 'PagesController@homePage');
 
 Route::group(['prefix' => 'admin'], function () {
+	Route::any('pages/store', 'PagesController@grapesStore')->name('grapes.store');
+	Route::get('pages/load', 'PagesController@grapesLoad')->name('grapes.load');
 	Voyager::routes();
 });
 
-// Route::group([
-// 	'prefix' => '{locale}',
-// 	'where' => ['locale' => '[a-zA-Z]{2}'],
-// 	// 'middleware' => 'setlocale',
-// ], function() {
-// 	Route::get('{slug}', 'PagesController@getPage');
-// 	// dd($prefix);
-// });
-
 Route::get('{slug}/{locale}', 'PagesController@getPage')->middleware('setlocale');
 
+Route::get('pages/single_post/{id}', 'Voyager\PostController@singlePostShow')
+	->name('single-post-show')
+	->middleware('setlocale');

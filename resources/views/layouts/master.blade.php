@@ -6,76 +6,54 @@
 
 	<title>Laravel</title>
 
+	<!-- Fontawesome -->
+	<script src="{{ asset('js/fontawesome/dded8d9ada.js') }}"></script>
+
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="{{ asset('css/all.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+	
+	<!-- SlickJs CSS -->
+	<link rel="stylesheet" href="{{ asset('slick-1.8.1/slick/slick.css') }}">
+	<link rel="stylesheet" href="{{ asset('slick-1.8.1/slick/slick-theme.css') }}">
+	
+	@yield('custom-css')
 
 </head>
 <body>
 	<div id="app">
-		<header class="text-white">
-			<div id="home-slider-bg">
-				{{-- top-menu --}}
-				<nav class="navbar navbar-expand-md navbar-light bg-transparent shadow-none">
-					<div class="container">
-
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							{{-- Left Side Of Navbar --}}
-							<ul class="navbar-nav mr-auto">
-								{{--  --}}
-							</ul>
-
-							{{-- Right Side Of Navbar --}}
-							<div>
-								<button type="submit" class="btn btn-warning btn-sm rounded-pill">
-									@lang('Request a callback')
-								</button>
-							</div>
-								
-							<div>
-								<p class="m-auto"><i class="fas fa-phone-alt fa-lg mr-2 ml-3"></i><span>71 200 00 05</span></p>
-							</div>
-							<div class="ml-3">
-    							{{-- @include('voyager::multilingual.language-selector') --}}
-								@include('partials.language-selector')
-							</div>
-						</div>
-					</div>
-				</nav>
-				
-				{{-- main-menu --}}
+		<div class="container-fluid header mb-4" style="background-image: linear-gradient(to right, #332D2D, #530F0F);">
+			<div class="container">
 				{{ menu('main', 'partials.main_menu') }}
-				{{-- /.Navbar --}}
-
-		      	{{-- home slider --}}
-		      	@yield('home-slider')
-		  	</div>
-		</header>
+			</div>
+		</div>
 		{{-- <div id="gjs"></div> --}}
-		@yield('content')   
+		@yield('content')
+
+		@include('partials.footer')
 	</div>
-	
-	{{-- <script src="{{ asset('js/grapes.min.js') }}"></script>
-	<script src="{{ asset('js/grapesjs-preset-webpage.min.js') }}"></script> --}}
+
 	<!-- Bootstrap JS -->
 	<script src="{{ asset('js/all.js') }}" charset="utf-8"></script>
 	<script src="{{ asset('js/app.js') }}" charset="utf-8"></script>
+	<script src="{{ asset('slick-1.8.1/slick/slick.min.js') }}" charset="utf-8"></script>
+	<script src="{{ asset('js/custom.js') }}" charset="utf-8"></script>
+	<script src="{{ asset('js/carousel.js') }}" charset="utf-8"></script>
 
-	<script type="text/javascript">
-		var editor = grapesjs.init({
-			container : '#gjs',
-			plugins: ['gjs-preset-webpage'],
-			pluginsOpts: {
-				'gjs-preset-webpage': {
-					blocks: ['link-block', 'quote', 'text-basic']
-				}
-			}
-	  	});
-	</script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+	<!-- SlickJs CSS -->
+	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	
+	<!-- Axios JS -->
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	@yield('vue-scripts')
 
 </body>
 </html>
