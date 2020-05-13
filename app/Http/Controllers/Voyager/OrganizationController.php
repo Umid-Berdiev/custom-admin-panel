@@ -239,7 +239,10 @@ class OrganizationController extends VoyagerBaseController
             $view = "voyager::$slug.read";
         }
 
-        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'isSoftDeleted'));
+        $orgUsers = \App\User::where('organization_id', $id)->get();
+        $orgMediaChannels = \App\MediaChannel::where('owner_id', $id)->get();
+
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'isSoftDeleted', 'orgUsers', 'orgMediaChannels'));
     }
 
     //***************************************

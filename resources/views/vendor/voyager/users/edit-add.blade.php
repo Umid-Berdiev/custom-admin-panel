@@ -7,23 +7,6 @@
 
 @section('css')
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="{{ asset('css/all.css') }}">
-	{{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
-	<style type="text/css">
-		.panel__top {
-		  padding: 0;
-		  width: 100%;
-		  display: flex;
-		  position: initial;
-		  justify-content: center;
-		  justify-content: space-between;
-		}
-		.panel__basic-actions {
-		  position: initial;
-		}
-
-	</style>
 @stop
 
 @section('page_title', __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->getTranslatedAttribute('display_name_singular'))
@@ -93,38 +76,7 @@
 									@elseif ($row->type == 'relationship')
 										@include('voyager::formfields.relationship', ['options' => $row->details])
 									@else
-										@if($row->field === 'body')
-											<ul class="nav nav-tabs" id="myTab" role="tablist">
-												<li class="nav-item">
-													<a class="nav-link" id="def-tab" data-toggle="tab" href="#def" role="tab" aria-controls="def" aria-selected="true">Rich Text Box Editor</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" id="grapes-tab" data-toggle="tab" href="#grapes" role="tab" aria-controls="grapes"
-													aria-selected="false">GrapesJS Editor</a>
-												</li>
-											</ul>
-
-											<div class="tab-content" id="myTabContent">
-												<div class="tab-pane fade" id="def" role="tabpanel" aria-labelledby="def-tab">
-													<textarea class="form-control richTextBox" name="{{ $row->field }}" id="richtext{{ $row->field }}">
-														{{ old($row->field, $dataTypeContent->{$row->field} ?? '') }}
-													</textarea>
-												</div>
-
-												<div class="tab-pane fade" id="grapes" role="tabpanel" aria-labelledby="grapes-tab">
-													<input type="hidden" data-i18n="true" name="body_i18n" id="body_i18n" value="{'en','ru'}">
-													<div class="panel__top">
-													    <div class="panel__basic-actions"></div>
-													</div>
-													<div id="gjs"></div>
-													{{-- <textarea class="form-control" name="{{ $row->field }}" id="grapes{{ $row->field }}" style="display: none;">
-														{{ old($row->field, $dataTypeContent->{$row->field} ?? '') }}
-													</textarea> --}}
-												</div>
-											</div>
-										@else
 										{!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
-										@endif
 									@endif
 
 									@foreach (app('voyager')->afterFormFields($row, $dataType, $dataTypeContent) as $after)
@@ -142,12 +94,11 @@
 
 						<div class="panel-footer">
 							@section('submit-buttons')
-								<button type="submit" class="btn btn-primary save" onclick="setBodyVal()">{{ __('voyager::generic.save') }}</button>
+								<button type="submit" class="btn btn-primary save">{{ __('voyager::generic.save') }}</button>
 							@stop
 							@yield('submit-buttons')
 						</div>
 					</form>
-								{{-- <button class="btn btn-primary save" onclick="setBodyVal()">Save2</button> --}}
 
 					<iframe id="form_target" name="form_target" style="display:none"></iframe>
 					<form id="my_form" action="{{ route('voyager.upload') }}" target="form_target" method="post"
@@ -188,8 +139,6 @@
 @stop
 
 @section('javascript')
-	<script src="{{ asset('js/all.js') }}" charset="utf-8"></script>
-
 	<script>
 		var params = {};
 		var $file;
@@ -262,69 +211,4 @@
 			$('[data-toggle="tooltip"]').tooltip();
 		});
 	</script>
-
-	<script type="text/javascript">
-		const editor = grapesjs.init({
-			container: '#gjs',
-			fromElement: true,
-			plugins: ['gjs-preset-webpage'],
-			pluginsOpts: {
-				'gjs-preset-webpage': {
-					blocks: ['link-block', 'quote', 'text-basic']
-				}
-			},
-			storageManager: {
-				// id: ,
-				type: 'local',
-				autosave: true,
-				autoload: true,
-				storeComponents: true,
-				storeStyles: true,
-				storeHtml: true,
-				storeCss: true
-			},
-			commands: {
-				defaults: [
-					{
-						id: 'store-data',
-						run(editor) {
-							editor.store();
-							let grapesComponents = localStorage.getItem("gjs-components");
-							let grapesStyles = localStorage.getItem("gjs-styles");
-							let grapesHtml = localStorage.getItem("gjs-html");
-							let grapesCss = localStorage.getItem("gjs-css");
-							let pageBody = document.getElementsByName('body');
-
-							pageBody.forEach(item => item.value = grapesHtml);
-							// console.log(grapesHtml);
-
-						},
-					}
-				]
-			}
-		});
-
-		editor.Panels.addPanel({
-		  id: 'panel-top',
-		  el: '.panel__top',
-		});
-		editor.Panels.addPanel({
-		  id: 'basic-actions',
-		  el: '.panel__basic-actions',
-		  buttons: [
-		    {
-		      id: 'store-data',
-		      active: true, // active by default
-		      className: 'btn-toggle-borders',
-		      label: 'Save',
-		      command: 'store-data', // Built-in command
-		    }
-		  ],
-		});
-
-	</script>
 @stop
-
-
-
-{{-- const wrapper = editor.DomComponents.getWrapper(); --}}
