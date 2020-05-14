@@ -26,6 +26,20 @@
 </head>
 <body>
 	<div id="app">
+		@if (Route::has('login'))
+        <div class="top-right links">
+            @auth
+                <a href="{{ url('/home') }}">{{ __('Главная') }}</a>
+            @else
+                <a href="{{ route('login') }}">{{ __('Авторизация') }}</a>
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}">{{ __('Регистрация') }}</a>
+                @endif
+            @endauth
+        </div>
+    	@endif
+		
 		<div class="container-fluid header mb-4" style="background-image: linear-gradient(to right, #332D2D, #530F0F);">
 			<div class="container">
 				{{ menu('main', 'partials.main_menu') }}

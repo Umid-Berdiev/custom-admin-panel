@@ -30,7 +30,7 @@
 								<div class="homenews_feed_time"><span class="visible-xs">{{ $post->created_at->format('d.m.Y') }} </span>{{ $post->created_at->format('h:m') }}</div>
 								<div class="homenews_feed_ico hidden-xs empty"></div>
 								<div class="homenews_feed_text">
-									<p><a href="{{ route('single-post-show', $post->id) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</a></p>
+									<p><a href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</a></p>
 								</div>
 							</div>
 						</li>
@@ -153,7 +153,7 @@
 		      <p class="card-text">{{ $post->excerpt }}</p>
 		      <p class="card-text"><small class="text-muted">
 		      	@foreach($post->categories as $category)
-					{{ $category->name . ' ' }}
+					{{ $category->getTranslatedAttribute('name') . ' ' }}
 		      	@endforeach
 		      </small></p>
 		    </div>
@@ -165,7 +165,7 @@
 		<div class="row justify-content-center py-3">
 			@foreach($post_categories as $category)
 				<div class="col-4">
-					<h4 class="border-bottom border-danger text-uppercase">{{ $category->name }}</h4>
+					<h4 class="border-bottom border-danger text-uppercase">{{ $category->getTranslatedAttribute('name') }}</h4>
 					@foreach($category->posts as $key => $post)
 						@if($key === 0)
 						<div class="media">

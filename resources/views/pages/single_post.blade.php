@@ -21,7 +21,7 @@
 	<div class="row single-post-block">
 		<div class="col-7">
 			<div class="row border-bottom border-danger">
-				<div class="col">
+				<div class="col-12">
 					<h4>Узбекистан прошёл пик количества болеющих COVID-19 неделю назад</h4>
 					{{-- <h4>{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</h4> --}}
 				</div>
@@ -37,16 +37,20 @@
 				</div>
 				<div class="col-auto">
 					<i class="fas fa-folder"></i>
-					<span>{!! $post->category->getTranslatedAttribute('name', app()->getLocale()) !!}</span>
+					<span>
+						@foreach($post->categories as $category) 
+							{{ $category->getTranslatedAttribute('name', app()->getLocale()) . ', ' }}
+						@endforeach
+					</span>
 				</div>
 				<div class="col-auto">
 					<span>{!! $post->author->organization->getTranslatedAttribute('name', app()->getLocale()) !!}</span>
 				</div>
 				<div class="col-auto ml-auto">
-					<i class="fas fa-facebook"></i>
-					<i class="fas fa-instagram"></i>
-					<i class="fas fa-telegram"></i>
-					<i class="fas fa-youtube"></i>
+					<i class="fab fa-facebook-square fa-lg"></i>
+					<i class="fab fa-instagram fa-lg"></i>
+					<i class="fab fa-telegram fa-lg"></i>
+					<i class="fab fa-youtube fa-lg"></i>
 				</div>
 			</div>
 			<div class="row">
@@ -58,58 +62,58 @@
 					{!! $post->getTranslatedAttribute('meta_keywords', app()->getLocale()) !!}
 				</div>
 				<div class="col-auto ml-auto">
-					<i class="fas fa-facebook"></i>
-					<i class="fas fa-instagram"></i>
-					<i class="fas fa-telegram"></i>
-					<i class="fas fa-youtube"></i>
+					<i class="fab fa-facebook-square fa-lg"></i>
+					<i class="fab fa-instagram fa-lg"></i>
+					<i class="fab fa-telegram fa-lg"></i>
+					<i class="fab fa-youtube fa-lg"></i>
 				</div>
 			</div>
 		</div>
 		<div class="col-5">
 			<div class="container-fluid mb-3">
-				<div class="row bg-info text-center text-white">
-					<h5>{{ __('Карточка пресс-службы') }}</h5>
+				<div class="bg-info text-center py-3">
+					<h5 class="my-3">{{ __('Карточка пресс-службы') }}</h5>
 				</div>
-				<div class="row" style="background-color: lightgrey;">
+				<div class="row no-gutters justify-content-center" style="background-color: lightgrey;">
 					<h6>{{ $post->author->organization->avatar }} {!! $post->author->organization->getTranslatedAttribute('name', app()->getLocale()) !!}</h6>
 				</div>
-				<div class="row">
-					<div class="col-9">
-						<h6><i class="fas fa-list"><span>{{ __('Количество новостей') }}</span></i></h6>
+				<div class="row no-gutters p-3 border-bottom justify-content-center">
+					<div class="col-8">
+						<h6><i class="fas fa-file-alt"></i><span>{{ __('Количество новостей') }}</span></h6>
 					</div>
 					<div class="col-3">10978</div>
-					<div class="col-9">
-						<h6><i class="fas fa-rate"><span>{{ __('Рейтинг') }}</span></i></h6>
+					<div class="col-8">
+						<h6><i class="fas fa-chart-line"></i><span>{{ __('Рейтинг') }}</span></h6>
 					</div>
 					<div class="col-3">12</div>
 				</div>
-				<div class="row">
-					<div class="col-9">
-						<h6><i class="fas fa-eye"><span>{{ __('Средний просмотр') }}</span></i></h6>
+				<div class="row no-gutters p-3 border-bottom justify-content-center">
+					<div class="col-8">
+						<h6><i class="fas fa-eye"></i><span>{{ __('Средний просмотр') }}</span></h6>
 					</div>
 					<div class="col-3">1983</div>
-					<div class="col-9">
-						<h6><i class="fas fa-rate"><span>{{ __('Рейтинг просмотров') }}</span></i></h6>
+					<div class="col-8">
+						<h6><i class="fas fa-chart-line"></i><span>{{ __('Рейтинг просмотров') }}</span></h6>
 					</div>
 					<div class="col-3">16</div>
 				</div>
-				<div class="row text-center">
+				<div class="row no-gutters p-3  justify-content-center text-center">
 					{{ $post->author->organization->website }}
 					<div class="col-12">
-						<a href="#"><i class="fas fa-facebook"></i></a>
-						<a href="#"><i class="fas fa-instagram"></i></a>
-						<a href="#"><i class="fas fa-telegram"></i></a>
-						<a href="#"><i class="fas fa-youtube"></i></a>
+						<i class="fab fa-facebook-square fa-lg"></i>
+						<i class="fab fa-instagram fa-lg"></i>
+						<i class="fab fa-telegram fa-lg"></i>
+						<i class="fab fa-youtube fa-lg"></i>
 					</div>
 				</div>
 			</div>
 			<div class="container-fluid mb-3">
-				<div class="bg-danger">
+				<div class="bg-danger text-center py-3">
 					<h5 class="text-white">{{ __('Популярные новости пресс-службы') }}</h5>
 				</div>
 				@foreach($posts as $post)
 				<div class="media p-3" style="border: 1px solid lightgrey;">
-					<img src="{{ Voyager::image($post->image) }}" class="mr-3 rounded-circle" alt="post-image" width="75">
+					<img src="{{ Voyager::image($post->image) }}" class="mr-3 rounded-circle" alt="post-image" width="75" height="75">
 					<div class="media-body">
 						<h5 class="mt-0">{{ $post->title}}</h5>
 						<p>{{ $post->excerpt }}</p>
@@ -118,12 +122,14 @@
 				@endforeach
 			</div>
 
-			@include('partials.digest_widget')
+			<div class="container-fluid">
+				@include('partials.digest_widget')
+			</div>
 		</div>
 	</div>
 
 	<div class="row other-news-block">
-		<div class="col-12 border-bottom border-danger">
+		<div class="col-12 border-bottom border-danger mb-4">
 			<h2 class="text-uppercase">{{ __('Другие новости') }}</h2>
 		</div>
 		<div class="col-3">
