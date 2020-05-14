@@ -7,7 +7,7 @@
 				<img src="{{ asset('/images/assets/logo2.png') }}" alt="Logo" width="180">
 			</a>
 		</div>
-		<div class="col-7 pt-4">
+		<div class="col-6 pt-4">
 			<div class="row">
 				<button class="btn btn-sm btn-danger">Прямой эфир</button>
 			</div>
@@ -19,13 +19,13 @@
 				@endforeach
 			</div>
 		</div>
-		<div class="col-2 pt-4">
-			<div class="row justify-content-between">
+		<div class="col-3 pt-4">
+			<div class="row justify-content-end">
 				<div class="col-auto">
 					@include('partials.language-selector')
 				</div>
 				<div class="col-auto">
-					<a class="btn btn-sm btn-danger" href="#">Войти</a>
+					<a class="btn btn-sm btn-danger" href="{{ route('voyager.login') }}">Войти в кабинет</a>
 				</div>
 			</div>
 			<div class="row mt-4">

@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/', function(Illuminate\Http\Request $request) {
+	return redirect()->route("home.page", 'ru');
+});
+
 Route::group(['prefix' => 'admin'], function () {
 	Route::any('pages/store', 'PagesController@grapesStore')->name('grapes.store');
 	Route::get('pages/load', 'PagesController@grapesLoad')->name('grapes.load');
@@ -20,7 +24,7 @@ Route::group(['prefix' => 'admin'], function () {
 // Route::get('{slug}/{locale}', 'PagesController@getPage');
 
 Route::group(['middleware' => 'setlocale'], function () {
-	Route::get('/{locale}', 'PagesController@homePage');
+	Route::get('/{locale}', 'PagesController@homePage')->name('home.page');
 	Route::get('pages/single_post/{id}/{locale}', 'Voyager\PostController@singlePostShow')
 		->name('single-post-show');
 });
