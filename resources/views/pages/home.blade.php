@@ -18,6 +18,9 @@
 			<div class="col-12">
 				<h2 class="text-uppercase">{{ __('Последние новости') }}</h2>
 			</div>
+			<div class="col-12 swiper-col">
+				@include('partials.home-news-slider')
+			</div>
 			<div class="col-7">
 				<img src="/images/65f52d341520e9dab90d85a9e44fba8e.jpg" alt="photo" width="100%">
 			</div>
@@ -45,8 +48,8 @@
 		<br>
 		<div class="row press-center-news-block">
 			<div class="col-8">
-				<div class="row mb-3" style="border-bottom: 1px solid red">
-					<h2>{{ __('СООБЩЕНИЯ ПРЕСС-ЦЕНТРА') }}</h2>
+				<div class="mb-3" style="border-bottom: 1px solid red">
+					<h2 class="text-uppercase">{{ __('Сообщения пресс-центра') }}</h2>
 				</div>
 				<div class="mb-3">
 					<div class="row">
@@ -82,8 +85,8 @@
 				</div>
 			</div>
 			<div class="col-4">
-				<div class="row ml-auto mb-3" style="border-bottom: 1px solid red">
-					<h2>{{ __('ПОПУЛЯРНОЕ') }}</h2>
+				<div class="ml-auto mb-3" style="border-bottom: 1px solid red">
+					<h2 class="text-uppercase">{{ __('Популярное') }}</h2>
 				</div>
 				<div class="pb-3" style="background-color: #d3d3d36e;">
 					@foreach($posts as $post)
