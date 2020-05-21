@@ -15,15 +15,13 @@ class Localization
      */
     public function handle($request, Closure $next)
     {
-        // dd($request->segment(1));
-        app()->setLocale($request->segment(2));
-        // dd($locale);
-     //    if(session()->has('locale')) {
-    	// 	app()->setLocale(session()->get('locale'));
-    	// } else {
-    	// 	app()->setLocale(config('voyager.multilingual.default'));
-    	// }
+        request()->session()->put('locale', request()->locale);
+        
+        if (!request()->session()->has('locale')) {
+            request()->session()->put('locale', config()->get('app.locale'));
+        }
 
-    	return $next($request);
+        app()->setLocale(request()->session()->get('locale'));
+        return $next($request);
     }
 }

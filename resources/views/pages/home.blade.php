@@ -18,6 +18,7 @@
 			<div class="col-12">
 				<h2 class="text-uppercase">{{ __('Последние новости') }}</h2>
 			</div>
+<<<<<<< HEAD
 			<!-- Slideshow container -->
 			<div class="col-7 slideshow-container">
 
@@ -27,6 +28,13 @@
 					<img src="{{ Voyager::image($post->image) }}" width="100%" />
 				</div>
 				@endforeach
+=======
+			<div class="col-12 swiper-col">
+				@include('partials.home-news-slider')
+			</div>
+			<div class="col-7">
+				<img src="/images/65f52d341520e9dab90d85a9e44fba8e.jpg" alt="photo" width="100%">
+>>>>>>> cdd08002440f14d2302c20341cae2a44a6342493
 			</div>
 			<div class="col-5">
 				<div class="homenews_feed">
@@ -38,7 +46,7 @@
 								<a class="homenews-feed-btn" href="javascript:void(0);" onclick="currentSlide({{ $key + 1 }})"><div class="homenews_feed_ico hidden-xs empty"></div></a>
 								{{-- <button class="homenews_feed_ico hidden-xs empty"></button> --}}
 								<div class="homenews_feed_text">
-									<p><a href="{{ route('single-post-show', $post->id) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</a></p>
+									<p><a href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</a></p>
 								</div>
 							</div>
 						</li>
@@ -53,8 +61,8 @@
 		<br>
 		<div class="row press-center-news-block">
 			<div class="col-8">
-				<div class="row mb-3" style="border-bottom: 1px solid red">
-					<h2>{{ __('СООБЩЕНИЯ ПРЕСС-ЦЕНТРА') }}</h2>
+				<div class="mb-3" style="border-bottom: 1px solid red">
+					<h2 class="text-uppercase">{{ __('Сообщения пресс-центра') }}</h2>
 				</div>
 				<div class="mb-3">
 					<div class="row">
@@ -90,8 +98,8 @@
 				</div>
 			</div>
 			<div class="col-4">
-				<div class="row ml-auto mb-3" style="border-bottom: 1px solid red">
-					<h2>{{ __('ПОПУЛЯРНОЕ') }}</h2>
+				<div class="ml-auto mb-3" style="border-bottom: 1px solid red">
+					<h2 class="text-uppercase">{{ __('Популярное') }}</h2>
 				</div>
 				<div class="pb-3" style="background-color: #d3d3d36e;">
 					@foreach($posts as $post)
@@ -161,7 +169,7 @@
 		      <p class="card-text">{{ $post->excerpt }}</p>
 		      <p class="card-text"><small class="text-muted">
 		      	@foreach($post->categories as $category)
-					{{ $category->name . ' ' }}
+					{{ $category->getTranslatedAttribute('name') . ' ' }}
 		      	@endforeach
 		      </small></p>
 		    </div>
@@ -173,7 +181,7 @@
 		<div class="row justify-content-center py-3">
 			@foreach($post_categories as $category)
 				<div class="col-4">
-					<h4 class="border-bottom border-danger text-uppercase">{{ $category->name }}</h4>
+					<h4 class="border-bottom border-danger text-uppercase">{{ $category->getTranslatedAttribute('name') }}</h4>
 					@foreach($category->posts as $key => $post)
 						@if($key === 0)
 						<div class="media">

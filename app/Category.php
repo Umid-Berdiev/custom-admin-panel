@@ -9,6 +9,8 @@ class Category extends Model
 {
     use Translatable;
 
+	protected $translatable = ['name', 'slug'];
+
 	protected $guarded = [];
 
 	public function posts()

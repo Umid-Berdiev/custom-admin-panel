@@ -40,12 +40,12 @@ class PagesController extends Controller
      * @param 
      * @return \Illuminate\Http\Response
      */
-    public function homePage()
+    public function homePage($locale)
     {
-        $posts = Post::with(['categories', 'author'])->get();
-        $categories = Category::with('posts')->get();
-        $post_categories = Category::where('parent_id', 4)->get();
-        
+        $posts = Post::with(['categories', 'author'])->withTranslations($locale)->get();
+        $categories = Category::with('posts')->withTranslations($locale)->get();
+        $post_categories = Category::where('parent_id', 4)->withTranslations($locale)->get();
+
         return view('pages.home', compact('posts', 'categories', 'post_categories'));
     }
 }

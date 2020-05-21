@@ -22,10 +22,13 @@ class PostController extends VoyagerBaseController
 {
 	use BreadRelationshipParser;
 
-	public function singlePostShow($id)
+	public function singlePostShow($id, $locale)
 	{
-		$post = Post::whereId($id)->with('author')->first();
-		return view('pages/single_post', compact('post'));
+		$post = Post::whereId($id)->with('author')->withTranslations($locale)->first();
+		$posts = Post::take(4)->withTranslations($locale)->get();
+		$other_posts = Post::take(4)->withTranslations($locale)->get();
+
+		return view('pages/single_post', compact('post', 'posts', 'other_posts'));
 	}
 
 }
