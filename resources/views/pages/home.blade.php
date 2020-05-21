@@ -18,7 +18,6 @@
 			<div class="col-12">
 				<h2 class="text-uppercase">{{ __('Последние новости') }}</h2>
 			</div>
-<<<<<<< HEAD
 			<!-- Slideshow container -->
 			<div class="col-7 slideshow-container">
 
@@ -28,13 +27,6 @@
 					<img src="{{ Voyager::image($post->image) }}" width="100%" />
 				</div>
 				@endforeach
-=======
-			<div class="col-12 swiper-col">
-				@include('partials.home-news-slider')
-			</div>
-			<div class="col-7">
-				<img src="/images/65f52d341520e9dab90d85a9e44fba8e.jpg" alt="photo" width="100%">
->>>>>>> cdd08002440f14d2302c20341cae2a44a6342493
 			</div>
 			<div class="col-5">
 				<div class="homenews_feed">
