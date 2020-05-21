@@ -237,3 +237,33 @@ ul li {
 	cursor: pointer;
 	fill: grey;
 }
+
+/* homepage news feed btns */
+.active-feed .homenews_feed_ico.empty {
+	background-color: blue;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  /*max-width: 1000px;*/
+  position: relative;
+  margin: auto;
+}
+
+/* Fading animation */
+.mySlides {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}

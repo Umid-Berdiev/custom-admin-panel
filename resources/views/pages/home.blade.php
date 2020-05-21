@@ -18,17 +18,25 @@
 			<div class="col-12">
 				<h2 class="text-uppercase">{{ __('Последние новости') }}</h2>
 			</div>
-			<div class="col-7">
-				<img src="/images/65f52d341520e9dab90d85a9e44fba8e.jpg" alt="photo" width="100%">
+			<!-- Slideshow container -->
+			<div class="col-7 slideshow-container">
+
+				<!-- Full-width images with number and caption text -->
+				@foreach($posts as $post)
+				<div class="mySlides">
+					<img src="{{ Voyager::image($post->image) }}" width="100%" />
+				</div>
+				@endforeach
 			</div>
 			<div class="col-5">
 				<div class="homenews_feed">
 					<ul>
-						@foreach($posts as $post)
+						@foreach($posts as $key => $post)
 						<li class="row mob_newsfeed">
 							<div class="mob-newsfeed-7">
 								<div class="homenews_feed_time"><span class="visible-xs">{{ $post->created_at->format('d.m.Y') }} </span>{{ $post->created_at->format('h:m') }}</div>
-								<div class="homenews_feed_ico hidden-xs empty"></div>
+								<a class="homenews-feed-btn" href="javascript:void(0);" onclick="currentSlide({{ $key + 1 }})"><div class="homenews_feed_ico hidden-xs empty"></div></a>
+								{{-- <button class="homenews_feed_ico hidden-xs empty"></button> --}}
 								<div class="homenews_feed_text">
 									<p><a href="{{ route('single-post-show', $post->id) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</a></p>
 								</div>
