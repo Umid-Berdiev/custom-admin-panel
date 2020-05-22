@@ -267,3 +267,8 @@ ul li {
   from {opacity: .4} 
   to {opacity: 1}
 }
+
+.card:hover, .media:hover {
+    transition: box-shadow .3s;
+	box-shadow: 0 0 11px rgba(33,33,33,.5)!important; 
+}

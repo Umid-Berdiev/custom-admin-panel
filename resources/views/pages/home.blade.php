@@ -6,11 +6,12 @@
 		<div class="home-banner"></div> 
 		<div class="row">
 			<div class="col-auto">
-				{{-- <weather-component /> --}}
-				@include('partials.weather')
+				<weather-component />
+				{{-- @include('partials.weather') --}}
 			</div>
 			<div class="col-auto">
-				@include('partials.kurs')
+				<exchange-component />
+				{{-- @include('partials.kurs') --}}
 			</div>
 		</div>
 		<br>
@@ -20,8 +21,7 @@
 			</div>
 
 			<!-- Slideshow container -->
-			<div class="col-7 slideshow-container">
-
+			<div class="col-8 slideshow-container">
 				<!-- Full-width images with number and caption text -->
 				@foreach($posts as $post)
 				<div class="mySlides">
@@ -29,7 +29,7 @@
 				</div>
 				@endforeach
 			</div>
-			<div class="col-5">
+			<div class="col-4">
 				<div class="homenews_feed">
 					<ul>
 						@foreach($posts as $key => $post)
@@ -148,8 +148,8 @@
 <div class="container-fluid" style="background-image: linear-gradient(to right, #332D2D, #530F0F);">
 	@include('partials.svg-map')
 </div>
-<div class="container-fluid">
-	<div class="container opinions py-4">
+<div class="container-fluid opinions" style="background-color: #d3d3d333;">
+	<div class="container py-4">
 		<div class="row mb-3">
 			<div class="col-12 border-bottom border-danger">
 				<h4 class="float-left text-uppercase"><b>{{  __('Мнения') }}</b></h4>
@@ -175,6 +175,9 @@
 		  @endforeach
 		</div>
 	</div>
+</div>
+
+<div class="container-fluid categories">
 	<div class="container">
 		<div class="row justify-content-center py-3">
 			@foreach($post_categories as $category)
@@ -183,7 +186,7 @@
 					@foreach($category->posts as $key => $post)
 						@if($key === 0)
 						<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
-							<div class="media">
+							<div class="media p-2">
 								<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
 								<div class="media-body">
 									<p>{{ $post->excerpt }}</p>
@@ -201,7 +204,7 @@
 							</div>
 						</a>
 						@endif
-
+	
 					@endforeach
 				</div>
 			@endforeach

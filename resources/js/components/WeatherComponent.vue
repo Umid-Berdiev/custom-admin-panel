@@ -6,10 +6,10 @@
 				<span class="sign">+</span><strong class="temp">28</strong><small>°C</small>
 			</div>
 			<div class="wRegions">
-				<div class="WRSelected" @click="toggleDropdown = ! toggleDropdown">
+				<div class="WRSelected" @click="toggle = !toggle">
 					<span>Toshkent</span>
 				</div>
-				<ul class="{'d-none' : toggleDropdown}">
+				<ul class="{'d-block' : toggle}">
 					<li><a href="#" data-temp="31" data-sign="+" data-icon="02d">Andijon</a></li>
 					<li><a href="#" data-temp="29" data-sign="+" data-icon="10d">Buxoro</a></li>
 					<li><a href="#" data-temp="30" data-sign="+" data-icon="10d">Farg'ona</a></li>
@@ -33,61 +33,22 @@
 <script>
 	export default {
 
-	  data () {
-	    return {
-	    	toggleDropdown: false
-	    }
-	  }
+		data () {
+			return {
+				toggle: false
+			}
+		},
+
+		mounted() {
+			console.log('Component mounted');
+		}
 	}
 </script>
 
-<style lang="css" scoped>
-	/*weather widget*/
-	.weather, .exchangeRates {
-	    display: inline-block;
-	    vertical-align: middle;
-	}
-	.weatherIco {
-	    display: inline-block;
-	    vertical-align: middle;
-	    /**vertical-align: auto;
-	    *zoom: 1;
-	    *display: inline;*/
-	    line-height: 40px;
-	    padding: 0 5px 0 0;
-	}
-	.weatherData {
-	    display: inline-block;
-	    vertical-align: middle;
-	    /**vertical-align: auto;
-	    *zoom: 1;
-	    *display: inline;*/
-	    color: inherit;
-	}
-	.wRegions {
-	    position: relative;
-	    z-index: 9;
-	}
-	.WRSelected {
-		font-size: 13px;
-		color: #bab2b2;
-		cursor: pointer;
-		white-space: nowrap;
-	}
-	.wRegions ul {
+<style>
+	.d-block {
 		display: none;
-		position: absolute;
-		top: 100%;
-		left: -55px;
-		margin: 28px 0 0;
-		width: 378px;
-		min-width: 100%;
-		background: #fff;
-		border: 1px solid #e8e9ea;
-		padding: 5px 8px;
-		box-shadow: 0 10px 10px rgba(0,0,0,0.1);
-		-o-box-shadow: 0 10px 10px rgba(0,0,0,0.1);
-		-moz-box-shadow: 0 10px 10px rgba(0,0,0,0.1);
-		-webkit-box-shadow: 0 10px 10px rgba(0,0,0,0.1);
 	}
-</style>
+</stile>
+
+

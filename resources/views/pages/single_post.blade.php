@@ -149,21 +149,11 @@
 	</div>
 	<div class="card-deck">
 		@foreach($other_posts as $post)
-		<!-- <div class="col-3">
-			<div class="card mb-2">
-				<img class="card-img-top" src="{{ Voyager::image($post->image) }}"
-				alt="Card image cap">
-				<div class="media-body" style="min-height: 80px; max-height: 80px;">
-					<p>{{ $post->excerpt }}</p>
-				</div>
-			</div>
-		</div> -->
-		<div class="card shadow">
+		<div class="card shadow-sm">
 		    <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
 		    	<img src="{{ Voyager::image($post->image) }}" class="card-img-top" alt="post image">
 		    	<div class="card-body">
 		    	  <p class="card-text">{{ $post->excerpt }}</p>
-		    	  {{-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> --}}
 		    	</div>
 		    </a>
 		  </div>

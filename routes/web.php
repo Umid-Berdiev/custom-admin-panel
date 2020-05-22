@@ -15,6 +15,8 @@ Route::get('/', function(Illuminate\Http\Request $request) {
 	return redirect()->route("home.page", 'ru');
 });
 
+Route::get('get_currency/{data}', 'PagesController@getCurrencies')->name('get_currency');
+
 Route::group(['prefix' => 'admin'], function () {
 	Route::any('pages/store', 'PagesController@grapesStore')->name('grapes.store');
 	Route::get('pages/load', 'PagesController@grapesLoad')->name('grapes.load');

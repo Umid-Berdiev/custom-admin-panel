@@ -62,7 +62,8 @@
 	@yield('swiper-scripts')
 
 	<script type="text/javascript">
-		let posts = @json($posts, JSON_UNESCAPED_UNICODE);		
+		axios("{{ route('get_currency', 'USD') }}").then(response => console.log(response.data));
+
 	</script>
 
 </body>
