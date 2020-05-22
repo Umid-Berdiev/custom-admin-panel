@@ -18,13 +18,7 @@
 			<div class="col-12">
 				<h2 class="text-uppercase">{{ __('Последние новости') }}</h2>
 			</div>
-<<<<<<< HEAD
-			<div class="col-12 swiper-col">
-				@include('partials.home-news-slider')
-			</div>
-			<div class="col-7">
-				<img id="home-news-img" src="" alt="photo" width="100%">
-=======
+
 			<!-- Slideshow container -->
 			<div class="col-7 slideshow-container">
 
@@ -34,7 +28,6 @@
 					<img src="{{ Voyager::image($post->image) }}" width="100%" />
 				</div>
 				@endforeach
->>>>>>> 89afe50db55706cc1ce8979356266bc992dd31e9
 			</div>
 			<div class="col-5">
 				<div class="homenews_feed">
@@ -43,12 +36,7 @@
 						<li class="row mob_newsfeed">
 							<div class="mob-newsfeed-7">
 								<div class="homenews_feed_time"><span class="visible-xs">{{ $post->created_at->format('d.m.Y') }} </span>{{ $post->created_at->format('h:m') }}</div>
-<<<<<<< HEAD
-								<a class="homenews_feed_ico_anchor" data-id="{{ $post->id }}" href="javascript:void(0);"><div class="homenews_feed_ico hidden-xs empty"></div></a>
-=======
 								<a class="homenews-feed-btn" href="javascript:void(0);" onclick="currentSlide({{ $key + 1 }})"><div class="homenews_feed_ico hidden-xs empty"></div></a>
-								{{-- <button class="homenews_feed_ico hidden-xs empty"></button> --}}
->>>>>>> 89afe50db55706cc1ce8979356266bc992dd31e9
 								<div class="homenews_feed_text">
 									<p><a href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</a></p>
 								</div>

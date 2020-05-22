@@ -61,70 +61,8 @@
 	@yield('vue-scripts')
 	@yield('swiper-scripts')
 
-<<<<<<< HEAD
-	<!-- Initialize Swiper -->
-	<script>
-		var posts = {!! json_encode($posts, JSON_UNESCAPED_UNICODE) !!};
-
-		function getHourAndMinute(data) {
-			let date = new Date(data);
-			let hour = date.getHours();
-			let minute = date.getMinutes();
-			return `${hour}:${minute}`;
-		}
-
-		var swiper = new Swiper('.swiper-container', {
-			direction: 'vertical',
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true,
-				renderBullet: function (index, className) {
-					console.log(posts);	
-					// return `<span class="${className}">${index + 1}</span>`;
-					return `
-						<div class="homenews_feed">
-							<ul>
-								<li class="row mob_newsfeed">
-									<div class="mob-newsfeed-7">
-										<div class="homenews_feed_time"><span class="visible-xs"></span>${getHourAndMinute(posts[index].created_at)}</div>
-										<div class="homenews_feed_ico hidden-xs empty ${className}">
-										</div>
-										<div class="homenews_feed_text">
-											<p><a href="/pages/single_post/${posts[index].id}/{{ app()->getLocale() }}" title="${posts[index].title}">${posts[index].title}</a></p>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-					`;
-				},
-			},
-		});
-
-		window.onload = () {
-			changeHomepageImage();
-		}
-
-		function changeHomepageImage() {
-			const anchors = document.querySelectorAll('.homenews_feed_ico_anchor');
-			const img = document.querySelector('.home-news-img');
-
-			anchors.forEach(item => {
-				item.addEventListener('click', (event) => {
-					const target = event.target;
-					const postImgPath = posts.find(item => item.id === target.dataset.id).image;
-					img.src = ;
-
-				});
-			});
-
-		}
-=======
 	<script type="text/javascript">
-		let posts = @json($posts, JSON_UNESCAPED_UNICODE);
-
-		
->>>>>>> 89afe50db55706cc1ce8979356266bc992dd31e9
+		let posts = @json($posts, JSON_UNESCAPED_UNICODE);		
 	</script>
 
 </body>
