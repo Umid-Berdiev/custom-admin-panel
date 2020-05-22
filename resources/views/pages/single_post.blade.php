@@ -122,13 +122,15 @@
 					<h5 class="text-white">{{ __('Популярные новости пресс-службы') }}</h5>
 				</div>
 				@foreach($posts as $post)
-				<div class="media p-3" style="border: 1px solid lightgrey;">
-					<img src="{{ Voyager::image($post->image) }}" class="mr-3 rounded-circle" alt="post-image" width="75" height="75">
-					<div class="media-body">
-						<h5 class="mt-0">{{ $post->title}}</h5>
-						<p>{{ $post->excerpt }}</p>
+				<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+					<div class="media p-3" style="border: 1px solid lightgrey;">
+						<img src="{{ Voyager::image($post->image) }}" class="mr-3 rounded-circle" alt="post-image" width="75" height="75">
+						<div class="media-body">
+							<h5 class="mt-0">{{ $post->title}}</h5>
+							<p>{{ $post->excerpt }}</p>
+						</div>
 					</div>
-				</div>
+				</a>
 				@endforeach
 			</div>
 

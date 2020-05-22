@@ -22,7 +22,7 @@
 				@include('partials.home-news-slider')
 			</div>
 			<div class="col-7">
-				<img src="/images/65f52d341520e9dab90d85a9e44fba8e.jpg" alt="photo" width="100%">
+				<img id="home-news-img" src="" alt="photo" width="100%">
 			</div>
 			<div class="col-5">
 				<div class="homenews_feed">
@@ -31,7 +31,7 @@
 						<li class="row mob_newsfeed">
 							<div class="mob-newsfeed-7">
 								<div class="homenews_feed_time"><span class="visible-xs">{{ $post->created_at->format('d.m.Y') }} </span>{{ $post->created_at->format('h:m') }}</div>
-								<div class="homenews_feed_ico hidden-xs empty"></div>
+								<a class="homenews_feed_ico_anchor" data-id="{{ $post->id }}" href="javascript:void(0);"><div class="homenews_feed_ico hidden-xs empty"></div></a>
 								<div class="homenews_feed_text">
 									<p><a href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</a></p>
 								</div>
@@ -72,13 +72,15 @@
 					</div>
 				</div>
 				@foreach($posts as $post)
-				<div class="media mb-3 p-3 border border-light" style="box-shadow: 2px 2px 5px #ccc;">
-				  	<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="150">
-				  	<div class="media-body">
-				    	<h5 class="mt-0">{{ $post->title}}</h5>
-				    	<p>{{ $post->excerpt }}</p>
-				  	</div>
-				</div>
+				<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+					<div class="media mb-3 p-3 border border-light" style="box-shadow: 2px 2px 5px #ccc;">
+						<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="150">
+						<div class="media-body">
+							<h5 class="mt-0">{{ $post->title}}</h5>
+							<p>{{ $post->excerpt }}</p>
+						</div>
+					</div>
+				</a>
 				@endforeach
 				<div class="feed-btn">
 					<a href="https://uzreport.news/news-feed" class="btn btn-sm btn-outline-secondary">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
@@ -90,13 +92,15 @@
 				</div>
 				<div class="pb-3" style="background-color: #d3d3d36e;">
 					@foreach($posts as $post)
-					<div class="media p-3" style="border: 1px solid lightgrey;">
-					  	<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
-					  	<div class="media-body">
-					    	<h5 class="mt-0">{{ $post->title}}</h5>
-					    	<p>{{ $post->excerpt }}</p>
-					  	</div>
-					</div>
+					<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+						<div class="media p-3" style="border: 1px solid lightgrey;">
+						  	<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
+						  	<div class="media-body">
+						    	<h5 class="mt-0">{{ $post->title}}</h5>
+						    	<p>{{ $post->excerpt }}</p>
+						  	</div>
+						</div>
+					</a>
 					@endforeach
 					<br>
 					<div class="feed-btn">
@@ -151,15 +155,17 @@
 		  @foreach($posts as $post)
 		  <div class="card">
 		    <img src="{{ Voyager::image($post->author->avatar) }}" class="mx-auto card-img-top rounded-circle p-3 w-50 h-100" alt="post-image">
-		    <div class="card-body">
-		      <h5 class="card-title">{{ $post->author->name }}</h5>
-		      <p class="card-text">{{ $post->excerpt }}</p>
-		      <p class="card-text"><small class="text-muted">
-		      	@foreach($post->categories as $category)
-					{{ $category->getTranslatedAttribute('name') . ' ' }}
-		      	@endforeach
-		      </small></p>
-		    </div>
+		    <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+		    	<div class="card-body">
+		    		<h5 class="card-title">{{ $post->author->name }}</h5>
+		    		<p class="card-text">{{ $post->title }}</p>
+		    		<p class="card-text"><small class="text-muted">
+		    			@foreach($post->categories as $category)
+		    			{{ $category->getTranslatedAttribute('name') . ' ' }}
+		    			@endforeach
+		    		</small></p>
+		    	</div>
+		    </a>
 		  </div>
 		  @endforeach
 		</div>
@@ -171,20 +177,24 @@
 					<h4 class="border-bottom border-danger text-uppercase">{{ $category->getTranslatedAttribute('name') }}</h4>
 					@foreach($category->posts as $key => $post)
 						@if($key === 0)
-						<div class="media">
-							<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
-							<div class="media-body">
-								<p>{{ $post->excerpt }}</p>
-								<p>{{ $post->created_at->format('d-m-Y') }}</p>
+						<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+							<div class="media">
+								<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
+								<div class="media-body">
+									<p>{{ $post->excerpt }}</p>
+									<p>{{ $post->created_at->format('d-m-Y') }}</p>
+								</div>
 							</div>
-						</div>
+						</a>
 						@else
-						<div class="media">
-							<div class="media-body">
-								<p>{{ $post->excerpt }}</p>
-								<p>{{ $post->created_at->format('d-m-Y') }}</p>
+						<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+							<div class="media">
+								<div class="media-body">
+									<p>{{ $post->excerpt }}</p>
+									<p>{{ $post->created_at->format('d-m-Y') }}</p>
+								</div>
 							</div>
-						</div>
+						</a>
 						@endif
 
 					@endforeach
