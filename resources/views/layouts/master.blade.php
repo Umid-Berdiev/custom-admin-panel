@@ -47,22 +47,21 @@
 	<script src="{{ asset('slick-1.8.1/slick/slick.min.js') }}" charset="utf-8"></script>
 	<script src="{{ asset('js/custom.js') }}" charset="utf-8"></script>
 	<script src="{{ asset('js/carousel.js') }}" charset="utf-8"></script>
-
+	<script src="{{ asset('js/homeslider.js') }}" charset="utf-8"></script>
+	
 	<!-- bootstrap-select JS -->
 	<script src="{{ asset('js/bootstrap-select.min.js') }}" charset="utf-8"></script>
 
 	<!-- SlickJs JS -->
 	<script src="{{ asset('slick-1.8.1/slick/slick.min.js') }}" charset="utf-8"></script>
 	
-	<!-- Swiper JS -->
-	<script src="{{ asset('swiper/js/swiper.min.js') }}"></script>
-
 	<!-- Axios JS -->
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 	@yield('vue-scripts')
 	@yield('swiper-scripts')
 
+<<<<<<< HEAD
 	<!-- Initialize Swiper -->
 	<script>
 		var posts = {!! json_encode($posts, JSON_UNESCAPED_UNICODE) !!};
@@ -120,6 +119,12 @@
 			});
 
 		}
+=======
+	<script type="text/javascript">
+		let posts = @json($posts, JSON_UNESCAPED_UNICODE);
+
+		
+>>>>>>> 89afe50db55706cc1ce8979356266bc992dd31e9
 	</script>
 
 </body>
