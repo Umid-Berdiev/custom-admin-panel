@@ -1,149 +1,141 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="flex-center position-ref full-height">
-	<div class="container mb-3">
-		<div class="home-banner"></div> 
-		<div class="row">
-			<div class="col-auto">
-				<weather-component />
-				{{-- @include('partials.weather') --}}
-			</div>
-			<div class="col-auto">
-				<exchange-component />
-				{{-- @include('partials.kurs') --}}
-			</div>
-		</div>
-		<br>
-		<div class="row last-news-block">
-			<div class="col-12">
-				<h2 class="text-uppercase">{{ __('Последние новости') }}</h2>
-			</div>
+<div class="container mb-3">
+    <br>
+    <div class="row last-news-block">
+        <div class="col-12">
+            <h2 class="text-uppercase">{{ __('Последние новости') }}</h2>
+        </div>
 
-			<!-- Slideshow container -->
-			<div class="col-8 slideshow-container">
-				<!-- Full-width images with number and caption text -->
-				@foreach($posts as $post)
-				<div class="mySlides">
-					<img src="{{ Voyager::image($post->image) }}" width="100%" />
-				</div>
-				@endforeach
-			</div>
-			<div class="col-4">
-				<div class="homenews_feed">
-					<ul>
-						@foreach($posts as $key => $post)
-						<li class="row mob_newsfeed">
-							<div class="mob-newsfeed-7">
-								<div class="homenews_feed_time"><span class="visible-xs">{{ $post->created_at->format('d.m.Y') }} </span>{{ $post->created_at->format('h:m') }}</div>
-								<a class="homenews-feed-btn" href="javascript:void(0);" onclick="currentSlide({{ $key + 1 }})"><div class="homenews_feed_ico hidden-xs empty"></div></a>
-								<div class="homenews_feed_text">
-									<p><a href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</a></p>
-								</div>
-							</div>
-						</li>
-						@endforeach	
-					</ul>
-					<div class="feed-btn">
-						<a href="https://uzreport.news/news-feed" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br>
-		<div class="row press-center-news-block">
-			<div class="col-8">
-				<div class="mb-3" style="border-bottom: 1px solid red">
-					<h2 class="text-uppercase">{{ __('Сообщения пресс-центра') }}</h2>
-				</div>
-				<div class="mb-3">
-					<div class="row">
-						<div class="col-auto">
-							<select class="custom-select">
-								<option selected>{{ __('Все пресс-службы') }}</option>
-								<option value="1">One</option>
-								<option value="2">Two</option>
-								<option value="3">Three</option>
-							</select>
-						</div>
-						<div class="col-auto">
-							<select class="custom-select">
-								<option selected>{{ __('Все рубрики') }}</option>
-								<option value="1">One</option>
-								<option value="2">Two</option>
-								<option value="3">Three</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				@foreach($posts as $post)
-				<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
-					<div class="media mb-3 p-3 border border-light" style="box-shadow: 2px 2px 5px #ccc;">
-						<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="150">
-						<div class="media-body">
-							<h5 class="mt-0">{{ $post->title}}</h5>
-							<p>{{ $post->excerpt }}</p>
-						</div>
-					</div>
-				</a>
-				@endforeach
-				<div class="feed-btn">
-					<a href="https://uzreport.news/news-feed" class="btn btn-sm btn-outline-secondary">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="ml-auto mb-3" style="border-bottom: 1px solid red">
-					<h2 class="text-uppercase">{{ __('Популярное') }}</h2>
-				</div>
-				<div class="pb-3" style="background-color: #d3d3d36e;">
-					@foreach($posts as $post)
-					<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
-						<div class="media p-3" style="border: 1px solid lightgrey;">
-						  	<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
-						  	<div class="media-body">
-						    	<h5 class="mt-0">{{ $post->title}}</h5>
-						    	<p>{{ $post->excerpt }}</p>
-						  	</div>
-						</div>
-					</a>
-					@endforeach
-					<br>
-					<div class="feed-btn">
-						<a href="https://uzreport.news/news-feed" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
-					</div>
-				</div>
-				<br>
-				<div class="p-3 bg-danger digest-widget">
-					<h4 class="text-uppercase text-white">{{ __('Собери свой дайджест') }}</h4>
-					<select class="selectpicker form-control form-control-sm mb-3">
-					  <option value="" disabled selected>{{ __('Пресс-служба') }}</option>
-					  <option value="1">Option 1</option>
-					  <option value="2">Option 2</option>
-					  <option value="3">Option 3</option>
-					</select>
-					<select class="selectpicker form-control form-control-sm mb-3">
-					  <option value="" disabled selected>{{ __('Рубрика') }}</option>
-					  <option value="1">Option 1</option>
-					  <option value="2">Option 2</option>
-					  <option value="3">Option 3</option>
-					</select>
-					<div class="form-group row text-white justify-content-between">
-						<label for="inputDate1" class="col-auto col-form-label">{{ __('Период') }} с </label>
-					    <div class="col-3">
-							<input type="date" id="inputDate1" style="border: none; border-bottom: 1px solid white">
-					    </div>
-					    <label for="inputDate2" class="col-auto col-form-label">{{ __('до') }}</label>
-					    <div class="col-3">
-							<input type="date" id="inputDate2" style="border: none; border-bottom: 1px solid white">
-					    </div>
-					</div>
-					<div class="row justify-content-center">
-						<button class="btn btn-light px-5">{{ __('Пуск') }}</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <!-- Slideshow container -->
+        <div class="col-8 slideshow-container">
+            <!-- Full-width images with number and caption text -->
+            @foreach($posts as $post)
+            <div class="mySlides">
+                <a href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">
+                    <img src="{{ Voyager::image($post->image) }}" width="100%" />
+                </a>
+            </div>
+            @endforeach
+        </div>
+        <div class="col-4">
+            <div class="homenews_feed">
+                <ul>
+                    @foreach($posts as $key => $post)
+                    <li class="row mob_newsfeed">
+                        <div class="mob-newsfeed-7">
+                            <div class="homenews_feed_time"><span class="visible-xs">{{ $post->created_at->format('d.m.Y') }} </span>{{ $post->created_at->format('h:m') }}</div>
+                            <a class="homenews-feed-btn" href="javascript:void(0);" onclick="currentSlide({{ $key + 1 }})">
+                                <div class="homenews_feed_ico hidden-xs empty"></div>
+                                <div class="homenews_feed_text">
+                                    <p>{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+                <div class="feed-btn">
+                    <a href="https://uzreport.news/news-feed" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Slideshow container -->
+    </div>
+    <br>
+    <div class="row press-center-news-block">
+        <div class="col-8">
+            <div class="mb-3" style="border-bottom: 1px solid red">
+                <h2 class="text-uppercase">{{ __('Сообщения пресс-центра') }}</h2>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-auto">
+                        <select class="custom-select">
+                            <option selected>{{ __('Все пресс-службы') }}</option>
+                            @foreach($orgs as $org)
+                            <option value="{{ $org->id }}">{{ $org->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <select class="custom-select">
+                            <option selected>{{ __('Все рубрики') }}</option>
+                            @foreach($post_categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+            @foreach($posts as $post)
+            <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+                <div class="media mb-3 p-3 border border-light" style="box-shadow: 2px 2px 5px #ccc;">
+                    <img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="150">
+                    <div class="media-body">
+                        <h5 class="mt-0">{{ $post->title}}</h5>
+                        <p>{{ $post->excerpt }}</p>
+                    </div>
+                </div>
+            </a>
+            @endforeach
+            <div class="feed-btn">
+                <a href="https://uzreport.news/news-feed" class="btn btn-sm btn-outline-secondary">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="ml-auto mb-3" style="border-bottom: 1px solid red">
+                <h2 class="text-uppercase">{{ __('Популярное') }}</h2>
+            </div>
+            <div class="pb-3" style="background-color: #d3d3d36e;">
+                @foreach($posts as $post)
+                <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+                    <div class="media p-3" style="border: 1px solid lightgrey;">
+                        <img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
+                        <div class="media-body">
+                            <h5 class="mt-0">{{ $post->title}}</h5>
+                            <p>{{ $post->excerpt }}</p>
+                        </div>
+                    </div>
+                </a>
+                @endforeach
+                <br>
+                <div class="feed-btn">
+                    <a href="https://uzreport.news/news-feed" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <br>
+            <div class="p-3 bg-danger digest-widget">
+                <h4 class="text-uppercase text-white">{{ __('Собери свой дайджест') }}</h4>
+                <select class="selectpicker form-control form-control-sm mb-3">
+                  <option value="" disabled selected>{{ __('Пресс-служба') }}</option>
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                </select>
+                <select class="selectpicker form-control form-control-sm mb-3">
+                  <option value="" disabled selected>{{ __('Рубрика') }}</option>
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                </select>
+                <div class="form-group row text-white justify-content-between">
+                    <label for="inputDate1" class="col-auto col-form-label">{{ __('Период') }} с </label>
+                    <div class="col-3">
+                        <input type="date" id="inputDate1" style="border: none; border-bottom: 1px solid white">
+                    </div>
+                    <label for="inputDate2" class="col-auto col-form-label">{{ __('до') }}</label>
+                    <div class="col-3">
+                        <input type="date" id="inputDate2" style="border: none; border-bottom: 1px solid white">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <button class="btn btn-light px-5">{{ __('Пуск') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container-fluid" style="background-image: linear-gradient(to right, #332D2D, #530F0F);">
 	@include('partials.svg-map')
@@ -204,7 +196,7 @@
 							</div>
 						</a>
 						@endif
-	
+
 					@endforeach
 				</div>
 			@endforeach

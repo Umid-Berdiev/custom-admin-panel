@@ -339,10 +339,11 @@ class OrganizationController extends VoyagerBaseController
             $redirect = redirect()->back();
         }
 
-        return $redirect->with([
+        /*return $redirect->with([
             'message'    => __('voyager::generic.successfully_updated')." {$dataType->getTranslatedAttribute('display_name_singular')}",
             'alert-type' => 'success',
-        ]);
+        ]);*/
+        return back();
     }
 
     //***************************************
@@ -422,10 +423,12 @@ class OrganizationController extends VoyagerBaseController
                 $redirect = redirect()->back();
             }
 
-            return $redirect->with([
+            /*return $redirect->with([
                 'message'    => __('voyager::generic.successfully_added_new')." {$dataType->getTranslatedAttribute('display_name_singular')}",
                 'alert-type' => 'success',
-            ]);
+            ]);*/
+            return back();
+
         } else {
             return response()->json(['success' => true, 'data' => $data]);
         }

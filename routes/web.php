@@ -29,4 +29,8 @@ Route::group(['middleware' => 'setlocale'], function () {
 	Route::get('/{locale}', 'PagesController@homePage')->name('home.page');
 	Route::get('pages/single_post/{id}/{locale}', 'Voyager\PostController@singlePostShow')
 		->name('single-post-show');
+	Route::get('pages/directories/{locale}', 'PagesController@directoriesPage')
+		->name('directories-page');
+	Route::get('pages/infodigest/{locale}', 'PagesController@infodigestPage')
+		->name('infodigest-page');
 });

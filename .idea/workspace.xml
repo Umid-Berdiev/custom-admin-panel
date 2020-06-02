@@ -2,20 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4da1bce4-3fc7-4709-89d6-d89f2277ac2a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/all.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/all.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/all.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/all.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/pages/directories.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/pages/infodigest.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PagesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PagesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/OrganizationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/OrganizationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Organization.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Organization.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/custom.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/homeslider.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/homeslider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ExchangeComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ExchangeComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/WeatherComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WeatherComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/uz.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/uz.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/about.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/contacts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/contacts.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/page_template.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/page_template.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/posts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/posts.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/single_post.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/single_post.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/home-news-slider.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/home-news-slider.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/partials/main_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/main_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/voyager/organizations/edit-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/voyager/organizations/edit-add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/voyager/users/edit-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/voyager/users/edit-add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +30,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -136,7 +143,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1ZlHg3VXvMUF94ZjQaLR7wiICNg" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -145,13 +154,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/pages" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OSPanel\domains\custom-admin-panel\resources\views\pages" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -170,10 +185,37 @@
       <option name="presentableId" value="Default" />
       <updated>1585406867362</updated>
       <workItem from="1585406897935" duration="777000" />
+      <workItem from="1590335772964" duration="26324000" />
+      <workItem from="1590987978728" duration="3056000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1590384131649">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1590384131649" />
+    <state x="324" y="90" width="700" height="530" key="recent.locations.popup" timestamp="1590476443062">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="324" y="90" width="700" height="530" key="recent.locations.popup/0.0.1366.728@0.0.1366.728" timestamp="1590476443062" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1590385676488">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1590385676488" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/pages/home.blade.php</url>
+          <line>3</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

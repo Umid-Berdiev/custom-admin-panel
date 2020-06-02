@@ -1,23 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="flex-center position-ref full-height">
-	<div class="container mb-3">
-		<div class="home-banner"></div> 
-		<div class="row">
-			<div class="col-auto">
-				{{-- <weather-component /> --}}
-				@include('partials.weather')
-			</div>
-			<div class="col-auto">
-				@include('partials.kurs')
-			</div>
-		</div>
-		<br>
-		
-	</div>
-</div>
-<div class="container mb-5">
+<div class="container mb-3">
 	<div class="row single-post-block">
 		<div class="col-8 shadow">
 			<div class="row mx-2 mt-3 no-gutters border-bottom border-danger mb-3 justify-content-between">
@@ -71,18 +55,16 @@
 			</div>
 		</div>
 		<div class="col-4">
-			<div class="container mb-3 shadow p-0">
-				<div class="bg-info text-center py-3">
-					<h5 class="my-1">{{ __('Карточка пресс-службы') }}</h5>
-				</div>
-				<div class="row no-gutters justify-content-center p-2" style="background-color: #e1e1e1;">
-					<div class="media">
-						<img class="align-self-center mx-2" src="{{ Voyager::image($post->author->organization->logo) }}" alt="organization logo">
-						<div class="media-body text-center">
-							<h6 class="mt-3">{!! $post->author->organization->getTranslatedAttribute('name', app()->getLocale()) !!}</h6>
-						</div>
-					</div>
-				</div>
+            <div class="bg-info text-center text-white py-3">
+                <h5 class="my-1">{{ __('Карточка пресс-службы') }}</h5>
+            </div>
+            <div class="org-cart shadow">
+                <div class="media p-2" style="background-color: #e1e1e1;">
+                    <img class="align-self-center mx-2" src="{{ Voyager::image($post->author->organization->logo) }}" alt="organization logo" width="50">
+                    <div class="media-body text-center">
+                        <h6 class="mt-3">{!! $post->author->organization->getTranslatedAttribute('name', app()->getLocale()) !!}</h6>
+                    </div>
+                </div>
 				<div class="row no-gutters p-3 border-bottom">
 					<div class="row w-100">
 						<div class="col-2 text-right"><i class="fas fa-file-alt"></i></div>
@@ -117,6 +99,7 @@
 					</div>
 				</div>
 			</div>
+            <br>
 			<div class="container mb-3 shadow p-0">
 				<div class="bg-danger text-center py-3">
 					<h5 class="text-white">{{ __('Популярные новости пресс-службы') }}</h5>

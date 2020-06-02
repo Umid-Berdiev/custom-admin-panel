@@ -9,7 +9,7 @@
 				<div class="WRSelected" @click="toggle = !toggle">
 					<span>Toshkent</span>
 				</div>
-				<ul class="{'d-block' : toggle}">
+				<ul :class="{'display-none': toggle}">
 					<li><a href="#" data-temp="31" data-sign="+" data-icon="02d">Andijon</a></li>
 					<li><a href="#" data-temp="29" data-sign="+" data-icon="10d">Buxoro</a></li>
 					<li><a href="#" data-temp="30" data-sign="+" data-icon="10d">Farg'ona</a></li>
@@ -35,7 +35,7 @@
 
 		data () {
 			return {
-				toggle: false
+				toggle: true
 			}
 		},
 
@@ -44,11 +44,3 @@
 		}
 	}
 </script>
-
-<style>
-	.d-block {
-		display: none;
-	}
-</stile>
-
-

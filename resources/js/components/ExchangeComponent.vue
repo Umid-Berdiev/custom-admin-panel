@@ -14,60 +14,33 @@
 
 <script>
 	const PROXY_URL = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/';
-	const USD = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/';
-	const EUR = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/';
-	const RUB = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/';
+	// const USD = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/';
+	// const EUR = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/';
+	// const RUB = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/';
+	const USD = '/get_currency/USD';
 	const URL = 'https://api/entries';
-
 	export default {
 
 		data() {
 			return {
-				usd: null,
+				usd: window.DATA,
 				eur: null,
 				rub: null,
 			}
 		},
 
 		methods: {
-			async getCurrencyRates(url) {
-				
-				await fetch(url, {
-					mode: 'no-cors' // no-cors, *cors, same-origin
-				}).then(response => console.log(response.JSON));
+			// async getDataUSD() {
+				/*const response = await fetch("{{ route('get_currency', 'USD') }}");
+				return await response.json();*/
 
-				// axios({
-				//   	method: 'GET',
-				//   	url: PROXY_URL,
-				// 	mode: 'no-cors',
-				// 	headers: {
-				// 		'Access-Control-Allow-Origin': '*',
-				// 	},
-				// 	// responseType: 'json'
-				// })
-				// .then(function (response) {
-				// 	console.log(response.data)
-				// });
-
-				// return response;
-			},
-
-			getCurrencyRatesByAjax(url) {
-				let oReq = new XMLHttpRequest();
-				oReq.open("GET", url, true);
-				oReq.addEventListener("load", console.log(this.responseText));
-				oReq.send();
-			}
+			// },
 
 		},
 
 		mounted() {
 			console.log('Component mounted');
-			// this.getCurrencyRatesByAjax(USD);
-			// console.log(this.getCurrencyRates(USD));
-			// this.usd = this.getCurrencyRates(USD);
-			// this.eur = this.getCurrencyRates(EUR);
-			// this.rub = this.getCurrencyRates(RUB);
+			// console.log(this.getDataUSD());
 		}
 	}
 </script>

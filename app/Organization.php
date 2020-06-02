@@ -15,4 +15,9 @@ class Organization extends Model
 	{
 		return $this->hasMany('App\User');
 	}
+
+	public function media_channels()
+	{
+		return $this->hasMany('App\MediaChannel', 'owner_id');
+	}
 }
