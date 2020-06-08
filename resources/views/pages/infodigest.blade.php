@@ -11,7 +11,7 @@
 			</div>
 			<div class="col-8">
                 <div class="border-bottom border-danger">
-                    <h5 class="">{{ __('Найдено') }}: 33 {{ __('новости') }}</h5>
+                    <h5 class="">{{ __('Найдено') }}: 4 {{ __('новости') }}</h5>
                     <span class="">
 
                     </span>

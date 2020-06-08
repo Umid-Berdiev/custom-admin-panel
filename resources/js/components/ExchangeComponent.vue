@@ -13,34 +13,36 @@
 </template>
 
 <script>
-	const PROXY_URL = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/';
-	// const USD = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/';
-	// const EUR = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/';
-	// const RUB = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/';
-	const USD = '/get_currency/USD';
-	const URL = 'https://api/entries';
-	export default {
+    import axios from 'axios';
+
+    const PROXY_URL = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/';
+    const URL = 'https://api/entries';
+    const USD = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/';
+    const EUR = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/';
+    const RUB = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/';
+    // const USD = '/get_currency/USD';
+
+    export default {
 
 		data() {
 			return {
-				usd: window.DATA,
+				usd: null,
 				eur: null,
 				rub: null,
 			}
 		},
 
 		methods: {
-			// async getDataUSD() {
-				/*const response = await fetch("{{ route('get_currency', 'USD') }}");
-				return await response.json();*/
-
-			// },
+			async getData(url) {
+				const response = await axios.get(url);
+				return await response.data;
+			},
 
 		},
 
 		mounted() {
 			console.log('Component mounted');
-			// console.log(this.getDataUSD());
+			console.log(this.getData(USD));
 		}
 	}
 </script>

@@ -79,7 +79,7 @@
 	@yield('swiper-scripts')
 
 	<script type="text/javascript">
-		const DATA = axios("{{ route('get_currency', 'USD') }}").then(response => response.data);
+		const DATA = axios("https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/").then(response => response.data);
 	</script>
 
 </body>

@@ -119,7 +119,7 @@ class PageController extends VoyagerBaseController
             $redirect = redirect()->back();
         }
 
-        return $redirect->with([
+        return back()->with([
             'message'    => __('voyager::generic.successfully_updated')." {$dataType->getTranslatedAttribute('display_name_singular')}",
             'alert-type' => 'success',
         ]);
@@ -135,7 +135,7 @@ class PageController extends VoyagerBaseController
     public function store(Request $request)
     {
         // dd($request->all());
-        
+
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
@@ -156,7 +156,7 @@ class PageController extends VoyagerBaseController
                 $redirect = redirect()->back();
             }
 
-            return $redirect->with([
+            return back()->with([
                 'message'    => __('voyager::generic.successfully_added_new')." {$dataType->getTranslatedAttribute('display_name_singular')}",
                 'alert-type' => 'success',
             ]);
