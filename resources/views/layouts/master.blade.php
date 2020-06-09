@@ -79,7 +79,8 @@
 	@yield('swiper-scripts')
 
 	<script type="text/javascript">
-		const DATA = axios("{{ route('get_currency', 'USD') }}").then(response => response.data);
+        /*axios.get('http://meteo.uz/api/v2/current-weather_ru.json')
+            .then(response => console.log('from master', response.data));*/
 	</script>
 
 </body>
