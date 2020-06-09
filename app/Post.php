@@ -8,10 +8,12 @@ use TCG\Voyager\Traits\Translatable;
 class Post extends Model
 {
     use Translatable;
-	
-	protected $guarded = [];
 
-	public function categories() {
+    protected $guarded = [];
+
+    protected $translatable = ['title', 'seo_title', 'excerpt', 'body', 'slug', 'meta_description', 'meta_keywords'];
+
+    public function categories() {
 		return $this->belongsToMany('App\Category');
 	}
 

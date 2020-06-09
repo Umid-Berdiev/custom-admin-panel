@@ -61,6 +61,9 @@
         <i class="{{ $dataType->icon }}"></i>
         {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->getTranslatedAttribute('display_name_singular') }}
     </h1>
+    <a href="{{ route('voyager.posts.index') }}" class="btn btn-primary btn-sm">
+        {{ __("Back") }}
+    </a>
     @include('voyager::multilingual.language-selector')
 @stop
 
