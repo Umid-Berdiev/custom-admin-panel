@@ -416,4 +416,8 @@ ul li {
     opacity: 1;
     visibility: visible !important;
 }
+.opinions img.card-img-top {
+    width: 60%;
+    height: 60%;
+}
 

@@ -150,19 +150,19 @@
 		</div>
 		<div class="card-deck">
 		  @foreach($posts as $post)
-		  <div class="card">
-		    <img src="{{ Voyager::image($post->author->avatar) }}" class="mx-auto card-img-top rounded-circle p-3 w-50 h-100" alt="post-image">
-		    <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
-		    	<div class="card-body">
-		    		<h5 class="card-title">{{ $post->author->name }}</h5>
-		    		<p class="card-text">{{ $post->title }}</p>
-		    		<p class="card-text"><small class="text-muted">
-		    			@foreach($post->categories as $category)
-		    			{{ $category->getTranslatedAttribute('name') . ' ' }}
-		    			@endforeach
-		    		</small></p>
-		    	</div>
-		    </a>
+		  <div class="card mx-2">
+		    <img src="{{ Voyager::image($post->author->avatar) }}" class="mx-auto card-img-top rounded-circle p-3" alt="post-image">
+            <div class="card-body">
+                <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+                <h5 class="card-title">{{ $post->author->firstname . ' ' . $post->author->lastname }}</h5>
+                <p class="card-text">{{ $post->title }}</p>
+                <p class="card-text"><small class="text-muted">
+                    @foreach($post->categories as $category)
+                    {{ $category->getTranslatedAttribute('name') . ' ' }}
+                    @endforeach
+                </small></p>
+                </a>
+            </div>
 		  </div>
 		  @endforeach
 		</div>

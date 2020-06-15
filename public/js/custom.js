@@ -10,3 +10,6 @@ $("path").click(function () {
 	$("#" + mySelectedArea).css("fill", "grey");
     $("#myselect").val(mySelectedArea);
 });
+
+const svgRegions = document.querySelectorAll('path');
+
