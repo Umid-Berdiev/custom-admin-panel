@@ -35,9 +35,15 @@
 
 		data () {
 			return {
+				wdata: [],
 				toggle: true
 			}
 		},
+
+        counted() {
+            axios.get('http://meteo.uz/api/v2/current-weather_ru.json')
+                .then(response => console.log('from master', response.data));
+        },
 
 		mounted() {
 			console.log('Component mounted');

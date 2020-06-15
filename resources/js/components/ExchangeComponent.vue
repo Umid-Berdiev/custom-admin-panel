@@ -13,22 +13,19 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
-    const PROXY_URL = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/';
-    const URL = 'https://api/entries';
-    const USD = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/';
-    const EUR = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/';
-    const RUB = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/';
-    // const USD = '/get_currency/USD';
-
-    export default {
+	const PROXY_URL = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/';
+	const USD = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/';
+	// const EUR = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/';
+	// const RUB = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/';
+	// const USD = '/get_currency/USD';
+	const URL = 'https://api/entries';
+	export default {
 
 		data() {
 			return {
 				usd: null,
 				eur: null,
-				rub: null,
+				rub: null
 			}
 		},
 

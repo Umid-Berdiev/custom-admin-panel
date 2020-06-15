@@ -47,7 +47,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4da1bce4-3fc7-4709-89d6-d89f2277ac2a" name="Default Changelist" comment="" />
+    <list default="true" id="4da1bce4-3fc7-4709-89d6-d89f2277ac2a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Page.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/OrganizationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/OrganizationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PositionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PositionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ExchangeComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ExchangeComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/infodigest.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/infodigest.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/voyager/posts/edit-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/voyager/posts/edit-add.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -217,7 +230,7 @@
       <workItem from="1585406897935" duration="777000" />
       <workItem from="1590335772964" duration="26324000" />
       <workItem from="1590987978728" duration="3056000" />
-      <workItem from="1591077904887" duration="7310000" />
+      <workItem from="1591507648700" duration="4067000" />
       <workItem from="1591611270939" duration="1241000" />
     </task>
     <servers />

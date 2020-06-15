@@ -2,7 +2,18 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-9">
-				
+                <ul class="list-group list-group-horizontal text-white">
+                    <li class="list-group-item border-right bg-transparent p-1"><a href="" class="text-white">{{ __('О сайте') }}</a></li>
+                    <li class="list-group-item border-right bg-transparent p-1"><a href="" class="text-white">{{ __('Реклама') }}</a></li>
+                    <li class="list-group-item border-right bg-transparent p-1"><a href="" class="text-white">{{ __('Контакты') }}</a></li>
+                    <li class="list-group-item border-right bg-transparent p-1"><a href="" class="text-white">{{ __('Вакансии') }}</a></li>
+                    <li class="list-group-item bg-transparent p-1">{{ __('Прислать новости') }} <a href="" class="text-white ml-2"><i class="fab fa-facebook-square fa-lg"></i></a> <a href="" class="text-white"><i class="fab fa-instagram fa-lg"></i></a> <a href="" class="text-white"><i class="fab fa-telegram fa-lg"></i></a> <a href="" class="text-white"><i class="fab fa-youtube-square fa-lg"></i></a></li>
+                </ul>
+                <br>
+                <div class="text-white">
+                    {{ __('Воспроизводство, копирование, тиражирование, распространение, и иное использование информации с сайта "INFOSPACE.UZ" возможно только с предварительного письменного разрешения редакции.') }}
+                    {{ __('INFOSPACE.UZ') }}
+                </div>
 			</div>
 			<div class="col-3">
 				{{-- Brand --}}

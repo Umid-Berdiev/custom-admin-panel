@@ -79,7 +79,8 @@
 	@yield('swiper-scripts')
 
 	<script type="text/javascript">
-		const DATA = axios("https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/").then(response => response.data);
+        /*axios.get('http://meteo.uz/api/v2/current-weather_ru.json')
+            .then(response => console.log('from master', response.data));*/
 	</script>
 
 </body>
