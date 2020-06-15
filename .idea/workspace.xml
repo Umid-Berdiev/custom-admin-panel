@@ -47,20 +47,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4da1bce4-3fc7-4709-89d6-d89f2277ac2a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Page.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/OrganizationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/OrganizationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PositionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PositionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ExchangeComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ExchangeComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/infodigest.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/infodigest.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/voyager/posts/edit-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/voyager/posts/edit-add.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="4da1bce4-3fc7-4709-89d6-d89f2277ac2a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -231,7 +218,7 @@
       <workItem from="1590335772964" duration="26324000" />
       <workItem from="1590987978728" duration="3056000" />
       <workItem from="1591077904887" duration="7310000" />
-      <workItem from="1591611270939" duration="594000" />
+      <workItem from="1591611270939" duration="1241000" />
     </task>
     <servers />
   </component>
@@ -263,11 +250,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="324" y="90" width="700" height="530" key="recent.locations.popup/0.0.1366.728@0.0.1366.728" timestamp="1590476443062" />
-    <state x="486" y="70" width="945" height="969" key="search.everywhere.popup" timestamp="1591087798924">
+    <state x="486" y="70" width="945" height="969" key="search.everywhere.popup" timestamp="1591611864537">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1590385676488" />
-    <state x="486" y="70" width="945" height="969" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591087798924" />
+    <state x="486" y="70" width="945" height="969" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591611864537" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
