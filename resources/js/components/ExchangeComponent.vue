@@ -30,16 +30,16 @@
 		},
 
 		methods: {
-			async getData(url) {
+			/*async getData(url) {
 				const response = await axios.get(url);
 				return await response.data;
 			},
-
+*/
 		},
 
 		mounted() {
 			console.log('Component mounted');
-			console.log(this.getData(USD));
+			// console.log(this.getData(USD));
 		}
 	}
 </script>

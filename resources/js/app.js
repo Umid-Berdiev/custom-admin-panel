@@ -28,7 +28,7 @@ Vue.component('weather-component', require('./components/WeatherComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const axios = require('axios');
+window.axios = require('axios');
 
 const app = new Vue({
 	el: '#app',

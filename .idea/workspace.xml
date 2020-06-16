@@ -48,18 +48,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4da1bce4-3fc7-4709-89d6-d89f2277ac2a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Page.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/OrganizationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/OrganizationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PositionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PositionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Voyager/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ExchangeComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ExchangeComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/infodigest.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/infodigest.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/voyager/posts/edit-add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/voyager/posts/edit-add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/WeatherComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WeatherComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/directories.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/directories.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/footer.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +190,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../minvodxoz" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -211,7 +206,7 @@
       <recent name="D:\OSPanel\domains\custom-admin-panel\resources\views\pages" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Firefox Remote.firefox">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
@@ -232,6 +227,9 @@
       <workItem from="1590987978728" duration="3056000" />
       <workItem from="1591507648700" duration="4067000" />
       <workItem from="1591611270939" duration="1241000" />
+      <workItem from="1592223817196" duration="585000" />
+      <workItem from="1592290599105" duration="1876000" />
+      <workItem from="1592308343908" duration="3553000" />
     </task>
     <servers />
   </component>
@@ -251,6 +249,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1592223858232">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1592223858232" />
     <state x="517" y="287" key="NewPhpFileDialog" timestamp="1590384131649">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -263,11 +265,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="324" y="90" width="700" height="530" key="recent.locations.popup/0.0.1366.728@0.0.1366.728" timestamp="1590476443062" />
-    <state x="486" y="70" width="945" height="969" key="search.everywhere.popup" timestamp="1591611864537">
+    <state x="486" y="70" width="945" height="969" key="search.everywhere.popup" timestamp="1592200130295">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1590385676488" />
-    <state x="486" y="70" width="945" height="969" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591611864537" />
+    <state x="486" y="70" width="945" height="969" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592200130295" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

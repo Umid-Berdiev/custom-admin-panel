@@ -40,13 +40,29 @@
 			}
 		},
 
-        counted() {
-            axios.get('http://meteo.uz/api/v2/current-weather_ru.json')
-                .then(response => console.log('from master', response.data));
+        methods: {
+            async getData() {
+                return await axios({
+                    method: 'get',
+                    // url: `http://meteo.uz/api/v2/current-weather_ru.json`,
+                    url: `https://jsonplaceholder.typicode.com/posts`,
+                    crossDomain: true,
+                    mode: 'no-cors',
+                    responseType: 'json',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                }).then(response => {
+                    if (response.status == 'OK')
+                        return response.data;
+                    else return response.status
+                });
+            }
         },
 
 		mounted() {
 			console.log('Component mounted');
+            console.log('from weather component', this.getData());
 		}
 	}
 </script>

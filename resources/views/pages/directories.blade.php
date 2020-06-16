@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-	<div class="container">
+	<div class="container mb-3">
 		<div class="row">
 			<div class="col-3">
 				<div class="border-bottom border-danger">
