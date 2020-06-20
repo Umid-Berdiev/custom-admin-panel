@@ -2011,7 +2011,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38464,9 +38463,7 @@ var render = function() {
             _vm._m(15)
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.getData } }, [_vm._v("get Data")])
+      ])
     ]
   )
 }

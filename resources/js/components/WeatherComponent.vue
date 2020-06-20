@@ -27,7 +27,6 @@
 				</ul>
 			</div>
 		</div>
-        <button @click="getData">get Data</button>
 	</div>
 </template>
 
