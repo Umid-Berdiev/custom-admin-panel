@@ -149,13 +149,13 @@
 			</div>
 		</div>
 		<div class="card-deck">
-		  @foreach($posts as $post)
+		  @for($i = 0; $i < 4; $i++)
 		  <div class="card mx-2">
-		    <img src="{{ Voyager::image($post->author->avatar) }}" class="mx-auto card-img-top rounded-circle p-3" alt="post-image">
+		    <img src="{{ Voyager::image($posts[$i]->author->avatar) }}" class="mx-auto card-img-top rounded-circle p-3" alt="post-image">
             <div class="card-body">
-                <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
-                <h5 class="card-title">{{ $post->author->firstname . ' ' . $post->author->lastname }}</h5>
-                <p class="card-text">{{ $post->title }}</p>
+                <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$posts[$i]->id, App::getLocale()]) }}">
+                <h5 class="card-title">{{ $posts[$i]->author->firstname . ' ' . $posts[$i]->author->lastname }}</h5>
+                <p class="card-text">{{ $posts[$i]->title }}</p>
                 <p class="card-text"><small class="text-muted">
                     @foreach($post->categories as $category)
                     {{ $category->getTranslatedAttribute('name') . ' ' }}
@@ -164,7 +164,7 @@
                 </a>
             </div>
 		  </div>
-		  @endforeach
+		  @endfor
 		</div>
 	</div>
 </div>

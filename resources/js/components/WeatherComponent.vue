@@ -27,6 +27,7 @@
 				</ul>
 			</div>
 		</div>
+        <button @click="getData">get Data</button>
 	</div>
 </template>
 
@@ -44,6 +45,7 @@
             async getData() {
                 return await axios({
                     method: 'get',
+                    // url: `https://cbu.uz/uz/arkhiv-kursov-valyut/json/`,
                     // url: `http://meteo.uz/api/v2/current-weather_ru.json`,
                     url: `https://jsonplaceholder.typicode.com/posts`,
                     crossDomain: true,
@@ -52,17 +54,12 @@
                     headers: {
                         'Access-Control-Allow-Origin': '*'
                     }
-                }).then(response => {
-                    if (response.status == 'OK')
-                        return response.data;
-                    else return response.status
-                });
+                }).then(response => this.wdata = response.data);
             }
         },
 
 		mounted() {
 			console.log('Component mounted');
-            console.log('from weather component', this.getData());
 		}
 	}
 </script>

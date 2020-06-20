@@ -2,7 +2,7 @@
 	<div class="row flex-nowrap">
 		<div class="col-3">
 			{{-- Brand --}}
-			<a class="navbar-brand text-white" href="{{ url('/', config('voyager.multilingual.default')) }}">
+			<a class="navbar-brand text-white" href="{{ url('/', app()->getLocale()) }}">
 				{{-- {{ config('app.name') }} --}}
 				<img src="{{ asset('/images/assets/logo2.png') }}" alt="Logo" width="180">
 			</a>

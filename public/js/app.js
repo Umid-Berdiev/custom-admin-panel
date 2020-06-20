@@ -2011,6 +2011,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2020,6 +2021,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     getData: function getData() {
+      var _this = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -2028,6 +2031,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 2;
                 return axios({
                   method: 'get',
+                  // url: `https://cbu.uz/uz/arkhiv-kursov-valyut/json/`,
                   // url: `http://meteo.uz/api/v2/current-weather_ru.json`,
                   url: "https://jsonplaceholder.typicode.com/posts",
                   crossDomain: true,
@@ -2037,7 +2041,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     'Access-Control-Allow-Origin': '*'
                   }
                 }).then(function (response) {
-                  if (response.status == 'OK') return response.data;else return response.status;
+                  return _this.wdata = response.data;
                 });
 
               case 2:
@@ -2054,7 +2058,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     console.log('Component mounted');
-    console.log('from weather component', this.getData());
   }
 });
 
@@ -38461,7 +38464,9 @@ var render = function() {
             _vm._m(15)
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.getData } }, [_vm._v("get Data")])
     ]
   )
 }
