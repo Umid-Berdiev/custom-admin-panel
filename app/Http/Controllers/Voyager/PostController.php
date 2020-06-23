@@ -17,7 +17,7 @@ class PostController extends VoyagerBaseController
 
 	public function singlePostShow($id, $locale)
 	{
-		$post = Post::whereId($id)->with('author')->withTranslations($locale)->first();
+		$post = Post::whereId($id)->with('author.organization.media_channels')->withTranslations($locale)->first();
 		$posts = Post::take(4)->withTranslations($locale)->get();
 		$other_posts = Post::take(4)->withTranslations($locale)->get();
 

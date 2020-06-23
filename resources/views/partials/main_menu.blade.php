@@ -18,7 +18,7 @@
                             @include('partials.language-selector')
                         </div>
                         <div class="col-auto">
-                            <a class="btn btn-sm btn-danger" href="{{ route('voyager.dashboard') }}">Войти в кабинет</a>
+                            <a class="btn btn-sm btn-danger" href="{{ route('voyager.dashboard') }}" target="_blank">{{ __('Войти в кабинет') }}</a>
                         </div>
                     </div>
                 </div>
