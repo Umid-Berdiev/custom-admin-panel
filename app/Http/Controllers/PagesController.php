@@ -35,7 +35,7 @@ class PagesController extends Controller
 		$posts = Post::with(['categories', 'author'])->withTranslations($locale)->latest()->get();
 		$categories = Category::with('posts')->withTranslations($locale)->get();
 		$post_categories = Category::where('parent_id', 4)->withTranslations($locale)->get();
-		$orgs = Organization::with(['users', 'media_channels'])->withTranslations($locale)->get();
+        $orgs = Organization::with(['users', 'media_channels'])->withTranslations($locale)->get();
 
 		return view('pages.home', compact('posts', 'categories', 'post_categories', 'orgs'));
 	}
@@ -68,7 +68,13 @@ class PagesController extends Controller
 		// file_put_contents("E:/OSPanel/domains/custom-admin-panel/public/usd.json", json_encode($usdData, JSON_UNESCAPED_UNICODE));
 
 		return json_encode($usdData);
-	}
+    }
+
+    public function getRegions(Request $request)
+    {
+        $regions = \App\UzRegion::all();
+        return response()->json($regions, 200);
+    }
 
 
 }

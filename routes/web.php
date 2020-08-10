@@ -16,6 +16,7 @@ Route::get('/', function(Illuminate\Http\Request $request) {
 });
 
 Route::get('get_currency/{data}', 'PagesController@getCurrencies')->name('get_currency');
+Route::get('get_regions', 'PagesController@getRegions')->name('get_regions');
 
 Route::group(['prefix' => 'admin'], function () {
 	Route::any('pages/store', 'PagesController@grapesStore')->name('grapes.store');
@@ -33,4 +34,6 @@ Route::group(['middleware' => 'setlocale'], function () {
 		->name('directories-page');
 	Route::get('pages/infodigest/{locale}', 'PagesController@infodigestPage')
 		->name('infodigest-page');
+	Route::get('regions/', 'PagesController@getRegions')
+		->name('regions');
 });

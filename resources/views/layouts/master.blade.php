@@ -30,7 +30,7 @@
 </head>
 <body>
 	<div id="app">
-		<header>
+		<header id="header">
             <div class="container-fluid header mb-4" style="background-image: linear-gradient(to right, #332D2D, #530F0F);">
                 <div class="container">
                     {{ menu('main', 'partials.main_menu') }}
@@ -40,20 +40,21 @@
                 <div class="home-banner"></div>
                 <div class="row">
                     <div class="col-auto">
-                        <weather-component />
-                        {{-- @include('partials.weather') --}}
+                        <!-- <weather-component /> -->
+                        @include('partials.weather')
                     </div>
                     <div class="col-auto">
-                        <exchange-component />
-                        {{-- @include('partials.kurs') --}}
+                        <!-- <exchange-component /> -->
+                        @include('partials.exchange_rates')
                     </div>
                 </div>
             </div>
         </header>
-        <main>
+        <main id="main">
+            <!-- <App /> -->
             @yield('content')
         </main>
-        <footer>
+        <footer id="footer">
             @include('partials.footer')
         </footer>
 	</div>
@@ -72,16 +73,63 @@
 	<!-- SlickJs JS -->
 	<script src="{{ asset('slick-1.8.1/slick/slick.min.js') }}" charset="utf-8"></script>
 
-	<!-- Axios JS -->
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script>
+        const layoutApp = new Vue({
+            el:'#header',
+            data() {
+                return {
+                    regions: [],
+                    cityName: 'Toshkent sh.',
+                    weatherData: [],
+                    USD: null,
+                    EUR: null,
+                    RUB: null,
+                }
+            },
+            methods: {
+                async getUzRegions() {
+                    const response = await axios('{{ route("get_regions") }}');
+                    this.regions = await response.data;
+                },
+                async getWeatherData(cityName) {
+                    let city_name = cityName.slice(0, cityName.indexOf(' '));
+                    if (city_name == "Farg'ona")
+                        city_name = "Fergana";
+                    const apiKey = '2dfb7904f8b22cab6a7ecac7f5e3fea1';
+                    const response = await axios(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${city_name},UZ&units=metric&lang=ru&appid=${apiKey}`);
+                        // url: 'https://jsonplaceholder.typicode.com/posts',
+                        // mode: 'no-cors',
+                        // headers: {
+                            // 'Access-Control-Allow-Origin': '*',
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                            // 'Access-Control-Allow-Credentials': true
+                        // },
+                        // responseType: 'json'
 
-	@yield('vue-scripts')
+                    this.weatherData = await response.data;
+                },
+                async getExchangeRates() {
+                    const response1 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`);
+                    const response2 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/`);
+                    const response3 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/`);
+                    this.USD = await response1.data;
+                    this.EUR = await response2.data;
+                    this.RUB = await response3.data;
+                }
+            },
+            mounted() {
+                this.getUzRegions();
+                axios({
+                    method: 'get',
+                    url: `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=Tashkent,UZ&units=metric&lang=ru&appid=2dfb7904f8b22cab6a7ecac7f5e3fea1`,
+                }).then(response => this.weatherData = response.data);
+                this.getExchangeRates();
+            }
+        });
+    </script>
+
+    @yield('vue-scripts')
 	@yield('swiper-scripts')
-
-	<script type="text/javascript">
-        /*axios.get('http://meteo.uz/api/v2/current-weather_ru.json')
-            .then(response => console.log('from master', response.data));*/
-	</script>
 
 </body>
 </html>

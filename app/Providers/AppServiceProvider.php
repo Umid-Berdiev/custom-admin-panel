@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Voyager::addFormField(GrapesFormField::class);
+        Voyager::useModel('Post', \App\Post::class);
     }
 
     /**

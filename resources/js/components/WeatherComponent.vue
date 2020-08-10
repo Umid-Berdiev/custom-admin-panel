@@ -32,7 +32,7 @@
 
 <script>
 	export default {
-
+        name: 'WeatherComponent',
 		data () {
 			return {
 				wdata: [],
@@ -42,23 +42,24 @@
 
         methods: {
             async getData() {
-                return await axios({
+                const response = await axios({
                     method: 'get',
                     // url: `https://cbu.uz/uz/arkhiv-kursov-valyut/json/`,
                     // url: `http://meteo.uz/api/v2/current-weather_ru.json`,
-                    url: `https://jsonplaceholder.typicode.com/posts`,
+                    // url: `https://jsonplaceholder.typicode.com/posts`,
                     crossDomain: true,
                     mode: 'no-cors',
-                    responseType: 'json',
+                    // responseType: 'json',
                     headers: {
                         'Access-Control-Allow-Origin': '*'
                     }
-                }).then(response => this.wdata = response.data);
+                });
+                this.wdata = await response.data;
             }
         },
 
 		mounted() {
-			console.log('Component mounted');
+			console.log('Component mounted from WeatherComponent');
 		}
 	}
 </script>

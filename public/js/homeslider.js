@@ -3,8 +3,7 @@ let slides = document.getElementsByClassName("mySlides");
 let dots = document.getElementsByClassName("homenews-feed-btn");
 
 window.onload = () => {
-    setInterval(showSlides, 3000); // Change image every 3 seconds
-
+    const intervalID = setInterval(showSlides, 3000); // Change image every 3 seconds
 };
 function showSlides(n = 0) {
 	for (let i = 0; i < slides.length; i++) {
@@ -27,6 +26,6 @@ function showSlides(n = 0) {
 }
 
 function currentSlide(n) {
-	clearInterval(showSlides);
+	clearInterval(setInterval(showSlides, 3000));
 	showSlides(clickedSlideIndex = n);
 }
