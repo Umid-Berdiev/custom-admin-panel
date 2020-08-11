@@ -15,7 +15,6 @@ Route::get('/', function(Illuminate\Http\Request $request) {
 	return redirect()->route("home.page", 'ru');
 });
 
-Route::get('get_currency/{data}', 'PagesController@getCurrencies')->name('get_currency');
 Route::get('get_regions', 'PagesController@getRegions')->name('get_regions');
 
 Route::group(['prefix' => 'admin'], function () {

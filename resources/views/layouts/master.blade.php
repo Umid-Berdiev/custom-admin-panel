@@ -7,14 +7,14 @@
 	<title>{{ env('APP_NAME', 'Laravel') }}</title>
 
 	<!-- Fontawesome -->
-	<script src="{{ asset('js/fontawesome/dded8d9ada.js') }}"></script>
+    <script src="{{ asset('js/fontawesome/dded8d9ada.js') }}"></script>
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="{{ asset('css/all.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
-	<!-- bootstrap-select CSS -->
+    <!-- bootstrap-select CSS -->
 	<link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
 
 	<!-- SlickJs CSS -->
