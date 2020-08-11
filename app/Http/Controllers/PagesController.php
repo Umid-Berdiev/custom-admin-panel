@@ -32,7 +32,7 @@ class PagesController extends Controller
 	 */
 	public function homePage($locale)
 	{
-		$posts = Post::with(['categories', 'author'])->withTranslations($locale)->latest()->get();
+		$posts = Post::with(['categories', 'author'])->withTranslations($locale)->latest()->take(6)->get();
 		$categories = Category::with('posts')->withTranslations($locale)->get();
 		$post_categories = Category::where('parent_id', 4)->withTranslations($locale)->get();
         $orgs = Organization::with(['users', 'media_channels'])->withTranslations($locale)->get();
