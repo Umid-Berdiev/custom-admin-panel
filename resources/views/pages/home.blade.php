@@ -18,7 +18,7 @@
                 </a>
             </div>
             @endforeach
-            <button class="btn btn-sm btn-outline-danger position-absolute play-btn" onclick="togglePlay({{ $key + 1 }})">
+            <button class="btn btn-sm btn-outline-danger position-absolute play-btn" onclick="togglePlay()">
                 <i id="play-resume" class="fas fa-pause-circle fa-2x"></i>
             </button>
         </div>
@@ -97,7 +97,7 @@
                     <div class="media p-3" style="border: 1px solid lightgrey;">
                         <img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
                         <div class="media-body">
-                            <h5 class="mt-0">{{ $post->title}}</h5>
+                            <h6 class="mt-0">{{ $post->title}}</h6>
                             {{-- <p>{{ $post->excerpt }}</p> --}}
                         </div>
                     </div>

@@ -16,7 +16,7 @@ function showSlides(n = 0) {
             dots[i].className = dots[i].className.replace(" active-feed", "");
         }
         if (n > slides.length) clickedSlideIndex = 0;
-        if (n < 0) clickedSlideIndex = 0;
+        // if (n < 0) clickedSlideIndex = 0;
         if (clickedSlideIndex > slides.length) clickedSlideIndex = 0;
         if(clickedSlideIndex > 0) {
             slides[clickedSlideIndex-1].style.display = "block";
@@ -31,17 +31,14 @@ function showSlides(n = 0) {
 
 function currentSlide(n) {
     clearInterval(intervalID);
-    showSlides((clickedSlideIndex = n));
+    showSlides(clickedSlideIndex = n);
     isPlaying = false;
     playResumeIcon.className = "fas fa-play-circle fa-2x";
 }
 
-function togglePlay(n) {
+function togglePlay() {
     if (isPlaying) {
-        clearInterval(intervalID);
-        showSlides(n);
-        playResumeIcon.className = "fas fa-play-circle fa-2x";
-        isPlaying = false;
+        currentSlide(clickedSlideIndex-1);
     } else {
         intervalID = setInterval(showSlides, 3000);
         playResumeIcon.className = "fas fa-pause-circle fa-2x";

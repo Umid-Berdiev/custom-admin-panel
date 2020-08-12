@@ -454,8 +454,8 @@ ul li {
     height: 500px;
 }
 .play-btn {
-    top: 90%;
-    right: 50%;
+    top: 5%;
+    right: 5%;
     display: none;
 }
 .slideshow-container:hover .play-btn {
