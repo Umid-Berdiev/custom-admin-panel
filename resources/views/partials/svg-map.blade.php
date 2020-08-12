@@ -12,13 +12,13 @@
 					<div class="col-6">
 						<div class="media">
 						  	<div class="media-body">
-						    	<h5 class="mt-0">{{ $post->title}}</h5>
-						    	<p>{{ $post->excerpt }}</p>
+						    	<h6 class="mt-0">{{ $post->title}}</h6>
+						    	<p class="text-warning small">{{ $post->author->organization->oblast->nameru }}</p>
 						  	</div>
 						</div>
 					</div>
 					@endforeach
-				</div>		
+				</div>
 			</div>
 			<div class="col-6">
 				<div class="row">

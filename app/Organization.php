@@ -19,5 +19,15 @@ class Organization extends Model
 	public function media_channels()
 	{
 		return $this->hasMany('App\MediaChannel', 'owner_id');
-	}
+    }
+
+    public function oblast()
+    {
+        return $this->belongsTo('App\UzRegion', 'region', 'regionid');
+    }
+
+    public function rayon()
+    {
+        return $this->belongsTo('App\UzDistrict', 'district', 'areaid');
+    }
 }
