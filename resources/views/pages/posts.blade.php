@@ -16,9 +16,9 @@
                 </div>
             </a>
         @endforeach
-        <div>
-            {{ $posts->links() }}
-        </div>
+    </div>
+    <div class="row">
+        {{ $posts->links() }}
     </div>
 </div>
 @endsection

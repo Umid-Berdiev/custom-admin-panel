@@ -9,14 +9,14 @@
 				</div>
 				<div class="row text-white pt-3">
 					@foreach($posts as $post)
-					<div class="col-6">
-						<div class="media">
-						  	<div class="media-body">
-						    	<h6 class="mt-0">{{ $post->title}}</h6>
-						    	<p class="text-warning small">{{ $post->author->organization->oblast->nameru }}</p>
-						  	</div>
-						</div>
-					</div>
+                        <a class="col-6 text-white text-decoration-none" href="{{ route('single-post-show', [$post->id, app()->getLocale()]) }}">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h6 class="mt-0">{{ $post->title}}</h6>
+                                    <p class="text-warning small">{{ $post->author->organization->oblast->nameru }}</p>
+                                </div>
+                            </div>
+                        </a>
 					@endforeach
 				</div>
 			</div>

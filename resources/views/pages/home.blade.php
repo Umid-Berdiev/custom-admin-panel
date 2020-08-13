@@ -40,7 +40,7 @@
                     @endforeach
                 </ul>
                 <div class="feed-btn">
-                    <a href="{{ url('/posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
+                    <a href="{{ route('posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
             </a>
             @endforeach
             <div class="feed-btn">
-                <a href="https://uzreport.news/news-feed" class="btn btn-sm btn-outline-secondary">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
+                <a href="{{ route('posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="col-4">
@@ -105,7 +105,7 @@
                 @endforeach
                 <br>
                 <div class="feed-btn">
-                    <a href="https://uzreport.news/news-feed" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
+                    <a href="{{ route('posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
                 </div>
             </div>
             <br>
@@ -208,7 +208,7 @@
 				</div>
 			@endforeach
 			<div class="feed-btn col-auto">
-				<a href="https://uzreport.news/news-feed" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
+				<a href="{{ route('posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
 			</div>
 		</div>
 	</div>
