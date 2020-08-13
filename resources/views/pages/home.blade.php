@@ -40,7 +40,7 @@
                     @endforeach
                 </ul>
                 <div class="feed-btn">
-                    <a href="https://uzreport.news/news-feed" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
+                    <a href="{{ url('/posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -140,9 +140,11 @@
         </div>
     </div>
 </div>
+
 <div class="container-fluid" style="background-image: linear-gradient(to right, #332D2D, #530F0F);">
 	@include('partials.svg-map')
 </div>
+
 <div class="container-fluid opinions" style="background-color: #d3d3d333;">
 	<div class="container py-4">
 		<div class="row mb-3">
@@ -184,22 +186,24 @@
 							<div class="media p-2">
 								<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
 								<div class="media-body">
-									<p>{{ $post->excerpt }}</p>
-									<p>{{ $post->created_at->format('d-m-Y') }}</p>
+									<p class="mb-1">{{ $post->title }}</p>
+									<p class="small mb-2"><i class="fas fa-history"></i> {{ $post->created_at->format('d-m-Y') }}</p>
 								</div>
 							</div>
 						</a>
 						@else
 						<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
 							<div class="media">
-								<div class="media-body">
-									<p>{{ $post->excerpt }}</p>
-									<p>{{ $post->created_at->format('d-m-Y') }}</p>
+								<div class="media-body p-2">
+									<p class="mb-1">{{ $post->title }}</p>
+									<p class="small mb-2"><i class="fas fa-history"></i> {{ $post->created_at->format('d-m-Y') }}</p>
 								</div>
 							</div>
 						</a>
 						@endif
-
+                        @if ($key == 4)
+                            @break
+                        @endif
 					@endforeach
 				</div>
 			@endforeach
@@ -209,6 +213,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="container-fluid bg-danger py-4">
 	<div class="container mb-3">
 		<div class="row text-white text-uppercase">

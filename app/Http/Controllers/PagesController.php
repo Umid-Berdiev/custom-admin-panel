@@ -49,32 +49,19 @@ class PagesController extends Controller
     {
         $posts = Post::with(['categories', 'author'])->withTranslations($locale)->get();
         return view('pages.infodigest', compact('posts'));
-	}
-
-	public function getCurrencies(Request $request)
-	{
-		// $last = DB::table('translate')->where('name', $request->data)->first();
-		// $date = new DateTime($last->timestamps ?? "2019-01-01");
-		// $current = time();
-		$usdData = file_get_contents("https://cbu.uz/uz/arkhiv-kursov-valyut/json/$request->data/");
-		/*if (($current - $date->getTimestamp()) >= 604800) {
-			if ($usdData != null) {
-				DB::table('currencies')->insert(
-					['name' => $request, 'value' => $usdData]
-				);
-			}
-		}*/
-		// dd($usdData);
-		// file_put_contents("E:/OSPanel/domains/custom-admin-panel/public/usd.json", json_encode($usdData, JSON_UNESCAPED_UNICODE));
-
-		return json_encode($usdData);
     }
 
-    public function getRegions(Request $request)
+    public function postsPage(Request $request, $locale)
+    {
+        $posts = Post::latest()->with('author.organization.media_channels', 'categories')->withTranslations($locale)->paginate(8);
+
+        return view('pages/posts', compact('posts'));
+    }
+
+	public function getRegions(Request $request)
     {
         $regions = \App\UzRegion::all();
         return response()->json($regions, 200);
     }
-
 
 }
