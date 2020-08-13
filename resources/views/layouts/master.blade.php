@@ -97,15 +97,6 @@
                         city_name = "Fergana";
                     const apiKey = '2dfb7904f8b22cab6a7ecac7f5e3fea1';
                     const response = await axios(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${city_name},UZ&units=metric&lang=ru&appid=${apiKey}`);
-                        // url: 'https://jsonplaceholder.typicode.com/posts',
-                        // mode: 'no-cors',
-                        // headers: {
-                            // 'Access-Control-Allow-Origin': '*',
-                            // 'Content-Type': 'application/x-www-form-urlencoded',
-                            // 'Access-Control-Allow-Credentials': true
-                        // },
-                        // responseType: 'json'
-
                     this.weatherData = await response.data;
                 },
                 async getExchangeRates() {
