@@ -79,6 +79,20 @@
         if (!localStorage.regions)
             localStorage.setItem("regions", JSON.stringify({!! json_encode($regions, JSON_UNESCAPED_UNICODE) !!}));
 
+        // if (!localStorage.USD) {
+        //     axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`)
+        //         .then(response => {
+        //             localStorage.USD = JSON.stringify(response.data)
+        //         })
+        // } else {
+        //     if ((new Date) - getLastTuesdayDate() > 604800000) {
+        //         axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`)
+        //             .then(response => {
+        //                 localStorage.USD = JSON.stringify(response.data)
+        //             })
+        //     }
+        // }
+
         const headerApp = new Vue({
             el:'#header',
             data() {
@@ -106,18 +120,66 @@
                     this.weatherIsLoading = false;
                 },
                 async getExchangeRates() {
-                    const response1 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`);
-                    const response2 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/`);
-                    const response3 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/`);
-                    this.USD = await response1.data;
-                    this.EUR = await response2.data;
-                    this.RUB = await response3.data;
+                    // // const response1 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`);
+                    // const response2 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/`);
+                    // const response3 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/`);
+                    // // this.USD = await response1.data;
+                    // this.EUR = await response2.data;
+                    // this.RUB = await response3.data;
+                    // this.exchangeRatesIsLoading = false;
+
+                    if (!localStorage.USD) {
+                        axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/`)
+                            .then(response => {
+                                localStorage.EUR = JSON.stringify(response.data);
+                                this.EUR = response.data;
+                            });
+                        axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/`)
+                            .then(response => {
+                                localStorage.RUB = JSON.stringify(response.data);
+                                this.RUB = response.data;
+                            });
+                        axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`)
+                            .then(response => {
+                                localStorage.USD = JSON.stringify(response.data);
+                                this.USD = response.data;
+                            });
+                    } else {
+                        if ((new Date) - getLastTuesdayDate() > 604800000) {
+                            axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/`)
+                                .then(response => {
+                                    localStorage.EUR = JSON.stringify(response.data)
+                                    this.EUR = response.data;
+                                })
+                            axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/`)
+                                .then(response => {
+                                    localStorage.RUB = JSON.stringify(response.data)
+                                    this.RUB = response.data;
+                                })
+                            axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`)
+                                .then(response => {
+                                    localStorage.USD = JSON.stringify(response.data)
+                                    this.USD = response.data;
+                                })
+                        }
+                    }
+
                     this.exchangeRatesIsLoading = false;
                 }
             },
+
             mounted() {
                 if (localStorage.regions) {
                     this.regions = JSON.parse(localStorage.regions);
+                }
+
+                if (localStorage.USD) {
+                    this.EUR = JSON.parse(localStorage.EUR);
+                    this.RUB = JSON.parse(localStorage.RUB);
+                    this.USD = JSON.parse(localStorage.USD);
+                    this.exchangeRatesIsLoading = false;
+                } else {
+                    this.getExchangeRates();
                 }
 
                 axios({
@@ -128,7 +190,6 @@
                     this.weatherIsLoading = false;
                 });
 
-                this.getExchangeRates();
             }
         });
 
