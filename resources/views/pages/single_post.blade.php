@@ -108,12 +108,12 @@
 					<h5 class="text-white">{{ __('Популярные новости пресс-службы') }}</h5>
 				</div>
 				@foreach($posts as $post)
-				<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+				<a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}">
 					<div class="media p-3" style="border: 1px solid lightgrey;">
 						<img src="{{ Voyager::image($post->image) }}" class="mr-3 rounded-circle" alt="post-image" width="75" height="75">
 						<div class="media-body">
 							<h5 class="mt-0">{{ $post->title}}</h5>
-							<p>{{ $post->excerpt }}</p>
+							{{-- <p>{{ $post->excerpt }}</p> --}}
 						</div>
 					</div>
 				</a>
@@ -136,10 +136,10 @@
 	<div class="card-deck">
 		@foreach($other_posts as $post)
 		<div class="card shadow-sm">
-			<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+			<a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}">
 				<img src="{{ Voyager::image($post->image) }}" class="card-img-top" alt="post image">
 				<div class="card-body">
-				  <p class="card-text">{{ $post->excerpt }}</p>
+				  <p class="card-text">{{ $post->title }}</p>
 				</div>
 			</a>
 		  </div>

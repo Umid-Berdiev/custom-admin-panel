@@ -13,7 +13,7 @@
             <!-- Full-width images with number and caption text -->
             @foreach($posts as $key => $post)
             <div class="mySlides">
-                <a href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">
+                <a href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">
                     <img src="{{ Voyager::image($post->image) }}" width="100%" />
                 </a>
             </div>
@@ -73,7 +73,7 @@
                 </div>
             </div>
             @foreach($posts as $post)
-            <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+            <a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}">
                 <div class="media mb-3 p-3 border border-light" style="box-shadow: 2px 2px 5px #ccc;">
                     <img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="150">
                     <div class="media-body">
@@ -93,7 +93,7 @@
             </div>
             <div class="pb-3" style="background-color: #d3d3d36e;">
                 @foreach($posts as $post)
-                <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+                <a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}">
                     <div class="media p-3" style="border: 1px solid lightgrey;">
                         <img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
                         <div class="media-body">
@@ -158,7 +158,7 @@
 		  <div class="card mx-2">
 		    <img src="{{ Voyager::image($posts[$i]->author->avatar) }}" class="mx-auto card-img-top rounded-circle p-3" alt="post-image">
             <div class="card-body">
-                <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$posts[$i]->id, App::getLocale()]) }}">
+                <a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$posts[$i]->id, App::getLocale()]) }}">
                 <h5 class="card-title">{{ $posts[$i]->author->firstname . ' ' . $posts[$i]->author->lastname }}</h5>
                 <p class="card-text">{{ $posts[$i]->title }}</p>
                 <p class="card-text"><small class="text-muted">
@@ -182,7 +182,7 @@
 					<h4 class="border-bottom border-danger text-uppercase">{{ $category->getTranslatedAttribute('name') }}</h4>
 					@foreach($category->posts as $key => $post)
 						@if($key === 0)
-						<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+						<a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}">
 							<div class="media p-2">
 								<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
 								<div class="media-body">
@@ -192,7 +192,7 @@
 							</div>
 						</a>
 						@else
-						<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+						<a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}">
 							<div class="media">
 								<div class="media-body p-2">
 									<p class="mb-1">{{ $post->title }}</p>

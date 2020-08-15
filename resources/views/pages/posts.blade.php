@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         @foreach ($posts as $post)
-            <a class="col-3 card text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, app()->getLocale()]) }}">
+            <a class="col-3 card text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, app()->getLocale()]) }}">
                 <img src="{{ Voyager::image($post->image) }}" class="card-img-top" alt="{{ $post->title}}" width="">
                 <div class="card-body">
                     <h6 class="card-title">{{ $post->getTranslatedAttribute('title', app()->getLocale()) }}</h6>

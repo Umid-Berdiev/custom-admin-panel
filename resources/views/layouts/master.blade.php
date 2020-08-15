@@ -38,7 +38,8 @@
             </div>
             <div class="container mb-3">
                 <div class="home-banner"></div>
-                <div class="row">
+
+                <div class="row mt-2">
                     <div class="col-auto">
                         <!-- <weather-component /> -->
                         @include('partials.weather')
@@ -74,7 +75,11 @@
 	<script src="{{ asset('slick-1.8.1/slick/slick.min.js') }}" charset="utf-8"></script>
 
 	<script>
-        const layoutApp = new Vue({
+
+        if (!localStorage.regions)
+            localStorage.setItem("regions", JSON.stringify({!! json_encode($regions, JSON_UNESCAPED_UNICODE) !!}));
+
+        const headerApp = new Vue({
             el:'#header',
             data() {
                 return {
@@ -84,20 +89,21 @@
                     USD: null,
                     EUR: null,
                     RUB: null,
+                    weatherIsLoading: true,
+                    exchangeRatesIsLoading: true,
                 }
             },
             methods: {
-                async getUzRegions() {
-                    const response = await axios('{{ route("get_regions") }}');
-                    this.regions = await response.data;
-                },
                 async getWeatherData(cityName) {
+                    this.weatherIsLoading = true;
                     let city_name = cityName.slice(0, cityName.indexOf(' '));
-                    if (city_name == "Farg'ona")
+                    if (city_name == "Farg`ona") {
                         city_name = "Fergana";
+                    }
                     const apiKey = '2dfb7904f8b22cab6a7ecac7f5e3fea1';
                     const response = await axios(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${city_name},UZ&units=metric&lang=ru&appid=${apiKey}`);
                     this.weatherData = await response.data;
+                    this.weatherIsLoading = false;
                 },
                 async getExchangeRates() {
                     const response1 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`);
@@ -106,20 +112,43 @@
                     this.USD = await response1.data;
                     this.EUR = await response2.data;
                     this.RUB = await response3.data;
+                    this.exchangeRatesIsLoading = false;
                 }
             },
             mounted() {
-                this.getUzRegions();
+                if (localStorage.regions) {
+                    this.regions = JSON.parse(localStorage.regions);
+                }
+
                 axios({
                     method: 'get',
                     url: `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=Tashkent,UZ&units=metric&lang=ru&appid=2dfb7904f8b22cab6a7ecac7f5e3fea1`,
-                }).then(response => this.weatherData = response.data);
+                }).then(response => {
+                    this.weatherData = response.data;
+                    this.weatherIsLoading = false;
+                });
+
                 this.getExchangeRates();
             }
         });
+
+        function getLastTuesdayDate() {
+            let lastTuesday = new Date(),
+                day = lastTuesday.getDay(),
+                diff = (day <= 2) ? (7 - 2 + day ) : (day - 2);
+
+            lastTuesday.setDate(lastTuesday.getDate() - diff);
+            lastTuesday.setHours(0);
+            lastTuesday.setMinutes(0);
+            lastTuesday.setSeconds(0);
+
+            return lastTuesday;
+        }
+
     </script>
 
-    @yield('vue-scripts')
+    @yield('infodigest-vue-scripts')
+    @yield('locals-vue-scripts')
 	@yield('swiper-scripts')
 
 </body>

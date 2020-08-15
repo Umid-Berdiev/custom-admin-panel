@@ -10,7 +10,7 @@
                 <div class="accordion" id="digestAccordion">
                     <div class="card">
                         <div class="card-header" id="headingOne">
-                            <button onclick="toggleRightDownNarrow(this)" class="btn btn-link accordion-button d-flex justify-content-between w-100" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <button @click="toggleRightDownNarrow" class="btn btn-link accordion-button d-flex justify-content-between w-100" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                 <span>{{ __('Пресс-служба') }}</span> <i class="fas fa-chevron-right mt-1"></i>
                             </button>
                         </div>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header" id="headingTwo">
-                            <button onclick="toggleRightDownNarrow(this)" class="btn btn-link accordion-button d-flex justify-content-between w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button @click="toggleRightDownNarrow" class="btn btn-link accordion-button d-flex justify-content-between w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 <span>{{ __('Рубрика') }}</span> <i class="fas fa-chevron-right mt-1"></i>
                             </button>
                         </div>
@@ -41,13 +41,17 @@
                     </div>
                     <div class="card">
                         <div class="card-header" id="headingThree">
-                            <button onclick="toggleRightDownNarrow(this)" class="btn btn-link accordion-button d-flex justify-content-between w-100" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <button @click="toggleRightDownNarrow" class="btn btn-link accordion-button d-flex justify-content-between w-100" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 <span>{{ __('Рейтинг') }}</span> <i class="fas fa-chevron-right mt-1"></i>
                             </button>
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#digestAccordion">
                             <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                <select name="rating" id="" class="custom-select">
+                                    <option value="10">{{ __('Топ 10') }}</option>
+                                    <option value="20">{{ __('Топ 20') }}</option>
+                                    <option value="50">{{ __('Топ 50') }}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -85,16 +89,23 @@
                     </div>
                 </div>
                 <br>
-                <div class="">
-                    <a v-for="post in filteredPosts" :key="post.id" class="text-muted text-decoration-none" :href=`/pages/single_post/${post.id}/{{ app()->getLocale() }}`>
-                        <div class="media mb-3 p-3 border border-light" style="box-shadow: 2px 2px 5px #ccc;">
-                            <img :src="'/storage/' + post.image" class="mr-3" alt="post-image" width="150">
-                            <div class="media-body">
-                                <h5 class="mt-0" v-text="post.title"></h5>
-                                <p class="small mb-2"><i class="fas fa-history"></i> @{{ post.created_at }}</p>
-                            </div>
+                <div class="position-relative h-100">
+                    <div v-if="isLoading" class="my-auto position-absolute" style="z-index: 1000; top: 30%; left: 45%;">
+                        <div class="spinner-grow" style="width: 5rem; height: 5rem; background-color: brown;" role="status">
+                            <span class="sr-only">Loading...</span>
                         </div>
-                    </a>
+                    </div>
+                    <div v-else>
+                        <a v-for="post in filteredPosts" :key="post.id" class="text-muted text-decoration-none" :href=`/pages/single_post/${post.id}/{{ app()->getLocale() }}`>
+                            <div class="media mb-3 p-3 border border-light" style="box-shadow: 2px 2px 5px #ccc;">
+                                <img :src="'/storage/' + post.image" class="mr-3" alt="post-image" width="150">
+                                <div class="media-body">
+                                    <h5 class="mt-0" v-text="post.title"></h5>
+                                    <p class="small mb-2"><i class="fas fa-history"></i> @{{ post.created_at }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                     {{-- <div class="feed-btn">
                         <a href="{{ route('posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
                     </div> --}}
@@ -104,7 +115,7 @@
 	</div>
 @endsection
 
-@section('vue-scripts')
+@section('infodigest-vue-scripts')
     <script>
         let digestApp = new Vue({
             el:'main',
@@ -115,22 +126,53 @@
                     selectedOrgs: [],
                     selectedCats: [],
                     filteredPosts: [],
-                    locale: ''
+                    isLoading: false,
                 }
             },
             methods: {
                 async getPosts() {
+                    this.isLoading = true;
                     let params = {
                         "orgs": [...this.selectedOrgs],
                         "cats": [...this.selectedCats],
                     }
-                    let response = await axios('{{ route("filtered_posts") }}', {params: params});
-                    this.filteredPosts = await response.data;
+                    axios('{{ route("filtered_posts") }}', {params: params})
+                        .then(response => {
+                            if (response.data.length == 0)
+                                alert("Нет данные!");
+
+                            this.filteredPosts = response.data
+                            this.isLoading = false;
+                        });
                 },
 
                 clearParams() {
                     this.selectedOrgs = []
                     this.selectedCats = []
+                },
+
+                toggleRightDownNarrow(element) {
+                    console.log(element);
+                    let accicon = element.target.lastChild;
+
+                    if (element.target.ariaExpanded == "true") {
+                        accicon.classList.remove('fa-chevron-down');
+                        accicon.classList.add('fa-chevron-right');
+                    } else {
+                        accicon.classList.remove('fa-chevron-right');
+                        accicon.classList.add('fa-chevron-down');
+                    }
+                },
+
+                datePickerFunc() {
+                    let datePickerEl = document.getElementById('datePicker');
+                    if (datePickerEl) {
+                        let curDate = new Date();
+                        let curDay = curDate.getDate() < 10 ? "0" + curDate.getDate() : curDate.getDate();
+                        let curMonth = (curDate.getMonth() + 1) < 10 ? "0" + (curDate.getMonth() + 1) : (curDate.getMonth() + 1);
+                        let curYear = curDate.getFullYear();
+                        datePickerEl.value = `${curYear}-${curMonth}-${curDay}`;
+                    }
                 }
             },
             mounted() {
