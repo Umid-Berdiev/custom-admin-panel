@@ -74,28 +74,28 @@
                     </button>
                 </div>
 			</div>
-			<div class="col-8">
-                <div class="row border-bottom border-danger">
-                    <div class="col-auto">
-                        <h5 class="">{{ __('Найдено') }}: @{{ filteredPosts.length }} {{ __('новости') }}</h5>
-                    </div>
-                    <div class="col-auto ml-auto">
-                        <span class="">
-                            <i class="fas fa-file-pdf"></i> {{ __('экспорт в PDF') }}
-                        </span>
-                        <span class="">
-                            <i class="fas fa-print"></i> {{ __('печать') }}
-                        </span>
+			<div class="col-8 position-relative">
+                <div v-if="isLoading" class="my-auto position-absolute" style="z-index: 1000; top: 30%; left: 45%;">
+                    <div class="spinner-grow" style="width: 5rem; height: 5rem; background-color: brown;" role="status">
+                        <span class="sr-only">Loading...</span>
                     </div>
                 </div>
-                <br>
-                <div class="position-relative h-100">
-                    <div v-if="isLoading" class="my-auto position-absolute" style="z-index: 1000; top: 30%; left: 45%;">
-                        <div class="spinner-grow" style="width: 5rem; height: 5rem; background-color: brown;" role="status">
-                            <span class="sr-only">Loading...</span>
+                <template v-else>
+                    <div class="row border-bottom border-danger">
+                        <div class="col-auto">
+                            <h5 class="">{{ __('Найдено') }}: @{{ filteredPosts.length }} {{ __('новости') }}</h5>
+                        </div>
+                        <div class="col-auto ml-auto">
+                            <span class="">
+                                <i class="fas fa-file-pdf"></i> {{ __('экспорт в PDF') }}
+                            </span>
+                            <span class="">
+                                <i class="fas fa-print"></i> {{ __('печать') }}
+                            </span>
                         </div>
                     </div>
-                    <div v-else>
+                    <br>
+                    <div class="">
                         <a v-for="post in filteredPosts" :key="post.id" class="text-muted text-decoration-none" :href=`/pages/single_post/${post.id}/{{ app()->getLocale() }}`>
                             <div class="media mb-3 p-3 border border-light" style="box-shadow: 2px 2px 5px #ccc;">
                                 <img :src="'/storage/' + post.image" class="mr-3" alt="post-image" width="150">
@@ -105,11 +105,11 @@
                                 </div>
                             </div>
                         </a>
+                        {{-- <div class="feed-btn">
+                            <a href="{{ route('posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
+                        </div> --}}
                     </div>
-                    {{-- <div class="feed-btn">
-                        <a href="{{ route('posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
-                    </div> --}}
-                </div>
+                </template>
 			</div>
 		</div>
 	</div>
@@ -126,7 +126,7 @@
                     selectedOrgs: [],
                     selectedCats: [],
                     filteredPosts: [],
-                    isLoading: false,
+                    isLoading: true,
                 }
             },
             methods: {
@@ -152,7 +152,6 @@
                 },
 
                 toggleRightDownNarrow(element) {
-                    console.log(element);
                     let accicon = element.target.lastChild;
 
                     if (element.target.ariaExpanded == "true") {
@@ -178,7 +177,8 @@
             mounted() {
                 this.organizations = {!! json_encode($orgs, JSON_UNESCAPED_UNICODE) !!}
                 this.categories = {!! json_encode($categories, JSON_UNESCAPED_UNICODE) !!}
-                // this.locale = {!! config('app.locale') !!}
+                this.datePickerFunc();
+                this.isLoading = false;
             }
         });
     </script>
