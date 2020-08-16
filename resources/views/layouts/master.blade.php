@@ -37,7 +37,9 @@
                 </div>
             </div>
             <div class="container mb-3">
-                <div class="home-banner"></div>
+                <div class="row">
+                    @include('partials.covid19banner')
+                </div>
 
                 <div class="row mt-2">
                     <div class="col-auto">
@@ -91,6 +93,8 @@
                     RUB: null,
                     weatherIsLoading: true,
                     exchangeRatesIsLoading: true,
+                    covid19DataGlobal: [],
+                    covid19DataLocal: [],
                 }
             },
             methods: {
@@ -129,6 +133,16 @@
                     this.exchangeRatesIsLoading = false;
                 },
 
+                fetchCovi19Data() {
+                    axios("https://api.covid19api.com/summary")
+                        .then(response => {
+                            localStorage.covid19Data = JSON.stringify(response.data);
+                            this.covid19DataGlobal = response.data.Global;
+                            this.covid19DataLocal = response.data.Countries.filter(item => item.CountryCode == "UZ")[0];
+                        })
+                        .catch(e => console.log("covid19 data fetching error: ", e));
+                },
+
                 getLastTuesdayDate() {
                     let lastTuesday = new Date();
                     let day = lastTuesday.getDay();
@@ -149,13 +163,10 @@
                 }
 
                 if (localStorage.USD && localStorage.RUB && localStorage.EUR) {
-                    console.log('step1');
                     if (Date.now() - this.getLastTuesdayDate() > 604800000) {
-                        console.log('step2');
                         this.getExchangeRates();
                     }
                     else {
-                        console.log('step3');
                         this.EUR = JSON.parse(localStorage.EUR);
                         this.RUB = JSON.parse(localStorage.RUB);
                         this.USD = JSON.parse(localStorage.USD);
@@ -186,6 +197,17 @@
                     });
                 }
 
+                if (localStorage.covid19Data) {
+                    let covid19DataDate = JSON.parse(localStorage.covid19Data).Date;
+                    if (Date.now() - (new Date(covid19DataDate)) > 18000000) {
+                        this.fetchCovi19Data();
+                    } else {
+                        this.covid19DataGlobal = JSON.parse(localStorage.covid19Data).Global;
+                        this.covid19DataLocal = JSON.parse(localStorage.covid19Data).Countries.filter(item => item.CountryCode == "UZ")[0];
+                    }
+                } else {
+                    this.fetchCovi19Data();
+                }
             }
         });
 

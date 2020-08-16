@@ -462,3 +462,12 @@ ul li {
     display: inline-block;
 }
 
+.home-banner .nav-pills .nav-link {
+    color: gray;
+}
+
+.home-banner .nav-pills .nav-link.active {
+    color: #fff;
+    background-color: unset;
+}
+
