@@ -79,20 +79,6 @@
         if (!localStorage.regions)
             localStorage.setItem("regions", JSON.stringify({!! json_encode($regions, JSON_UNESCAPED_UNICODE) !!}));
 
-        // if (!localStorage.USD) {
-        //     axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`)
-        //         .then(response => {
-        //             localStorage.USD = JSON.stringify(response.data)
-        //         })
-        // } else {
-        //     if ((new Date) - getLastTuesdayDate() > 604800000) {
-        //         axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`)
-        //             .then(response => {
-        //                 localStorage.USD = JSON.stringify(response.data)
-        //             })
-        //     }
-        // }
-
         const headerApp = new Vue({
             el:'#header',
             data() {
@@ -117,54 +103,43 @@
                     const apiKey = '2dfb7904f8b22cab6a7ecac7f5e3fea1';
                     const response = await axios(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${city_name},UZ&units=metric&lang=ru&appid=${apiKey}`);
                     this.weatherData = await response.data;
+                    this.cityName = cityName;
+                    localStorage.weatherData = JSON.stringify(response.data);
+                    localStorage.cityName = cityName;
                     this.weatherIsLoading = false;
                 },
-                async getExchangeRates() {
-                    // // const response1 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`);
-                    // const response2 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/`);
-                    // const response3 = await axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/`);
-                    // // this.USD = await response1.data;
-                    // this.EUR = await response2.data;
-                    // this.RUB = await response3.data;
-                    // this.exchangeRatesIsLoading = false;
 
-                    if (!localStorage.USD) {
-                        axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/`)
-                            .then(response => {
-                                localStorage.EUR = JSON.stringify(response.data);
-                                this.EUR = response.data;
-                            });
-                        axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/`)
-                            .then(response => {
-                                localStorage.RUB = JSON.stringify(response.data);
-                                this.RUB = response.data;
-                            });
-                        axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`)
-                            .then(response => {
-                                localStorage.USD = JSON.stringify(response.data);
-                                this.USD = response.data;
-                            });
-                    } else {
-                        if ((new Date) - getLastTuesdayDate() > 604800000) {
-                            axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/`)
-                                .then(response => {
-                                    localStorage.EUR = JSON.stringify(response.data)
-                                    this.EUR = response.data;
-                                })
-                            axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/`)
-                                .then(response => {
-                                    localStorage.RUB = JSON.stringify(response.data)
-                                    this.RUB = response.data;
-                                })
-                            axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`)
-                                .then(response => {
-                                    localStorage.USD = JSON.stringify(response.data)
-                                    this.USD = response.data;
-                                })
-                        }
-                    }
+                async getExchangeRates() {
+                    axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/`)
+                        .then(response => {
+                            localStorage.EUR = JSON.stringify(response.data);
+                            this.EUR = response.data;
+                        });
+                    axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/`)
+                        .then(response => {
+                            localStorage.RUB = JSON.stringify(response.data);
+                            this.RUB = response.data;
+                        });
+                    axios(`https://cors-anywhere.herokuapp.com/https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/`)
+                        .then(response => {
+                            localStorage.USD = JSON.stringify(response.data);
+                            this.USD = response.data;
+                        });
 
                     this.exchangeRatesIsLoading = false;
+                },
+
+                getLastTuesdayDate() {
+                    let lastTuesday = new Date();
+                    let day = lastTuesday.getDay();
+                    let diff = (day <= 2) ? (7 - 2 + day ) : (day - 2);
+
+                    lastTuesday.setDate(lastTuesday.getDate() - diff);
+                    lastTuesday.setHours(0);
+                    lastTuesday.setMinutes(0);
+                    lastTuesday.setSeconds(0);
+
+                    return lastTuesday;
                 }
             },
 
@@ -173,38 +148,46 @@
                     this.regions = JSON.parse(localStorage.regions);
                 }
 
-                if (localStorage.USD) {
-                    this.EUR = JSON.parse(localStorage.EUR);
-                    this.RUB = JSON.parse(localStorage.RUB);
-                    this.USD = JSON.parse(localStorage.USD);
-                    this.exchangeRatesIsLoading = false;
+                if (localStorage.USD && localStorage.RUB && localStorage.EUR) {
+                    console.log('step1');
+                    if (Date.now() - this.getLastTuesdayDate() > 604800000) {
+                        console.log('step2');
+                        this.getExchangeRates();
+                    }
+                    else {
+                        console.log('step3');
+                        this.EUR = JSON.parse(localStorage.EUR);
+                        this.RUB = JSON.parse(localStorage.RUB);
+                        this.USD = JSON.parse(localStorage.USD);
+                        this.exchangeRatesIsLoading = false;
+                    }
                 } else {
+                    console.log('step4');
                     this.getExchangeRates();
                 }
 
-                axios({
-                    method: 'get',
-                    url: `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=Tashkent,UZ&units=metric&lang=ru&appid=2dfb7904f8b22cab6a7ecac7f5e3fea1`,
-                }).then(response => {
-                    this.weatherData = response.data;
-                    this.weatherIsLoading = false;
-                });
+                if (localStorage.weatherData && localStorage.cityName) {
+                    if (Date.now() - localStorage.weatherData.dt * 1000 >= 3600000) {
+                        this.getWeatherData(localStorage.cityName);
+                    } else {
+                        this.weatherData = JSON.parse(localStorage.weatherData);
+                        this.cityName = localStorage.cityName;
+                        this.weatherIsLoading = false;
+                    }
+                } else {
+                    axios({
+                        method: 'get',
+                        url: `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=Tashkent,UZ&units=metric&lang=ru&appid=2dfb7904f8b22cab6a7ecac7f5e3fea1`,
+                    }).then(response => {
+                        localStorage.weatherData = JSON.stringify(response.data);
+                        localStorage.cityName = this.cityName;
+                        this.weatherData = response.data;
+                        this.weatherIsLoading = false;
+                    });
+                }
 
             }
         });
-
-        function getLastTuesdayDate() {
-            let lastTuesday = new Date(),
-                day = lastTuesday.getDay(),
-                diff = (day <= 2) ? (7 - 2 + day ) : (day - 2);
-
-            lastTuesday.setDate(lastTuesday.getDate() - diff);
-            lastTuesday.setHours(0);
-            lastTuesday.setMinutes(0);
-            lastTuesday.setSeconds(0);
-
-            return lastTuesday;
-        }
 
     </script>
 
