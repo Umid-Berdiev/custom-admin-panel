@@ -34,4 +34,6 @@ Route::group(['middleware' => 'setlocale'], function () {
 		->name('directories-page');
 	Route::get('pages/infodigest/{locale}', 'PagesController@infodigestPage')
 		->name('infodigest-page');
+	Route::post('pages/infodigest/{locale}', 'PagesController@redirectFromHomeToInfodigest')
+		->name('from-home-to-infodigest');
 });

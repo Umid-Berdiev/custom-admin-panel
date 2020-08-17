@@ -216,6 +216,7 @@
     @yield('infodigest-vue-scripts')
     @yield('locals-vue-scripts')
 	@yield('swiper-scripts')
+	@yield('digest-vue-scripts')
 
 </body>
 </html>

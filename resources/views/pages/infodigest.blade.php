@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-	<div class="container my-5">
+	<div id="infodigest" class="container my-5">
 		<div class="row">
 			<div class="col-4">
 				<div class="bg-danger py-3">
@@ -56,11 +56,26 @@
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-header d-flex" id="headingThree">
-                            <label for="datePicker" class="btn btn-link">
+                        <div class="card-header row" id="headingThree">
+                            {{-- <label for="datePicker" class="btn btn-link">
                                 <span>{{ __('Период') }}</span>
                             </label>
-                            <input id="datePicker" class="ml-auto" type="date" />
+                            <input id="datePicker" class="ml-auto" type="date" /> --}}
+                            <div class="col-4">
+                                <label for="inputDate1" class="col-form-label btn btn-link">{{ __('Период') }}</label>			
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="inputDate1" class="col-form-label">{{ __('с') }}</label>			
+                                        <input type="date" id="inputDate1" v-model="inputDate1">
+                                    </div>
+                                    <div class="col">
+                                        <label for="inputDate2" class="col-form-label">{{ __('до') }}</label>
+                                        <input type="date" id="inputDate2" v-model="inputDate2">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,7 +133,7 @@
 @section('infodigest-vue-scripts')
     <script>
         let digestApp = new Vue({
-            el:'main',
+            el:'#infodigest',
             data() {
                 return {
                     organizations: [],
@@ -127,6 +142,8 @@
                     selectedCats: [],
                     filteredPosts: [],
                     isLoading: true,
+                    inputDate1: null,
+					inputDate2: null,
                 }
             },
             methods: {
@@ -164,21 +181,26 @@
                 },
 
                 datePickerFunc() {
-                    let datePickerEl = document.getElementById('datePicker');
-                    if (datePickerEl) {
-                        let curDate = new Date();
-                        let curDay = curDate.getDate() < 10 ? "0" + curDate.getDate() : curDate.getDate();
-                        let curMonth = (curDate.getMonth() + 1) < 10 ? "0" + (curDate.getMonth() + 1) : (curDate.getMonth() + 1);
-                        let curYear = curDate.getFullYear();
-                        datePickerEl.value = `${curYear}-${curMonth}-${curDay}`;
-                    }
+                    let pastDate = new Date();
+					let pastDay = '01';
+					let pastMonth = (pastDate.getMonth() + 1) < 10 ? "0" + (pastDate.getMonth() + 1) : (pastDate.getMonth() + 1);
+					let pastYear = pastDate.getFullYear();
+					
+					let curDate = new Date();
+					let curDay = curDate.getDate() < 10 ? "0" + curDate.getDate() : curDate.getDate();
+					let curMonth = (curDate.getMonth() + 1) < 10 ? "0" + (curDate.getMonth() + 1) : (curDate.getMonth() + 1);
+					let curYear = curDate.getFullYear();
+					
+					this.inputDate1 = `${pastYear}-${pastMonth}-${pastDay}`;
+					this.inputDate2 = `${curYear}-${curMonth}-${curDay}`;
                 }
             },
             mounted() {
                 this.organizations = {!! json_encode($orgs, JSON_UNESCAPED_UNICODE) !!}
                 this.categories = {!! json_encode($categories, JSON_UNESCAPED_UNICODE) !!}
-                this.datePickerFunc();
+                this.filteredPosts = {!! json_encode($result, JSON_UNESCAPED_UNICODE) !!}
                 this.isLoading = false;
+                this.datePickerFunc();
             }
         });
     </script>
