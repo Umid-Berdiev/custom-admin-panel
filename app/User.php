@@ -40,5 +40,10 @@ class User extends \TCG\Voyager\Models\User
 	public function organization()
 	{
 		return $this->belongsTo('App\Organization');
-	}
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Posts', 'author_id', 'id');
+    }
 }

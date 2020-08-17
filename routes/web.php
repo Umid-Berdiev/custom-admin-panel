@@ -15,7 +15,8 @@ Route::get('/', function(Illuminate\Http\Request $request) {
 	return redirect()->route("home.page", 'ru');
 });
 
-Route::get('get_currency/{data}', 'PagesController@getCurrencies')->name('get_currency');
+Route::get('get_regions', 'PagesController@getRegions')->name('get_regions');
+Route::get('filtered_posts', 'PagesController@getFilteredPosts')->name('filtered_posts');
 
 Route::group(['prefix' => 'admin'], function () {
 	Route::any('pages/store', 'PagesController@grapesStore')->name('grapes.store');
@@ -23,12 +24,12 @@ Route::group(['prefix' => 'admin'], function () {
 	Voyager::routes();
 });
 
-// Route::get('{slug}/{locale}', 'PagesController@getPage');
-
 Route::group(['middleware' => 'setlocale'], function () {
 	Route::get('/{locale}', 'PagesController@homePage')->name('home.page');
-	Route::get('pages/single_post/{id}/{locale}', 'Voyager\PostController@singlePostShow')
-		->name('single-post-show');
+	Route::get('pages/posts/{locale}', 'PagesController@postsPage')
+		->name('posts');
+	Route::get('pages/single_post/{id}/{locale}', 'PagesController@singlePostPage')
+		->name('single-post-page');
 	Route::get('pages/directories/{locale}', 'PagesController@directoriesPage')
 		->name('directories-page');
 	Route::get('pages/infodigest/{locale}', 'PagesController@infodigestPage')

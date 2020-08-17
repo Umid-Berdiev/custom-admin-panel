@@ -18,7 +18,7 @@
                             @include('partials.language-selector')
                         </div>
                         <div class="col-auto">
-                            <a class="btn btn-sm btn-danger" href="{{ route('voyager.dashboard') }}">Войти в кабинет</a>
+                            <a class="btn btn-sm btn-danger" href="{{ route('voyager.dashboard') }}" target="_blank">{{ __('Войти в кабинет') }}</a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
 							@endforeach
                             <form class="search nav-item nav-link ml-auto">
                                 <div class="search__wrapper">
-                                    <input type="text" name="" placeholder="Search for..." class="search__field">
+                                    <input type="text" class="search__field">
                                     <button type="submit" class="fa fa-search search__icon"></button>
                                 </div>
                             </form>

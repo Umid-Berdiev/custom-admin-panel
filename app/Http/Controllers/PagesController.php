@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Organization;
 use TCG\Voyager\Models\Page;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\Organization;
+use Illuminate\Database\Eloquent\Builder;
 
 class PagesController extends Controller
 {
@@ -32,43 +33,90 @@ class PagesController extends Controller
 	 */
 	public function homePage($locale)
 	{
-		$posts = Post::with(['categories', 'author'])->withTranslations($locale)->latest()->get();
+		$posts = Post::with('categories', 'author.organization.oblast')->withTranslations($locale)->latest()->take(6)->get();
 		$categories = Category::with('posts')->withTranslations($locale)->get();
 		$post_categories = Category::where('parent_id', 4)->withTranslations($locale)->get();
-		$orgs = Organization::with(['users', 'media_channels'])->withTranslations($locale)->get();
+        $orgs = Organization::with('users', 'media_channels')->withTranslations($locale)->get();
+        $regions = \App\UzRegion::all();
 
-		return view('pages.home', compact('posts', 'categories', 'post_categories', 'orgs'));
+		return view('pages.home', compact(
+            'posts',
+            'categories',
+            'post_categories',
+            'orgs',
+            'regions'
+        ));
 	}
 
     public function directoriesPage(Request $request, $locale)
     {
-        return view('pages.directories');
+        $regions = \App\UzRegion::all();
+
+        return view('pages.directories', compact('regions'));
 	}
 
     public function infodigestPage(Request $request, $locale)
     {
-        $posts = Post::with(['categories', 'author'])->withTranslations($locale)->get();
-        return view('pages.infodigest', compact('posts'));
-	}
+        $posts = Post::with('categories', 'author')->withTranslations($locale)->latest()->get();
+        $categories = Category::where('parent_id', 4)->with('posts')->withTranslations($locale)->get();
+        $orgs = Organization::with('users', 'media_channels')->withTranslations($locale)->get();
+        $regions = \App\UzRegion::all();
 
-	public function getCurrencies(Request $request)
+        return view('pages.infodigest', compact('posts', 'categories', 'orgs', 'regions'));
+    }
+
+    public function postsPage(Request $request, $locale)
+    {
+        $posts = Post::latest()->with('author.organization.media_channels', 'categories')->withTranslations($locale)->paginate(8);
+        $regions = \App\UzRegion::all();
+
+        return view('pages.posts', compact('posts', 'regions'));
+    }
+
+    public function singlePostPage($id, $locale)
 	{
-		// $last = DB::table('translate')->where('name', $request->data)->first();
-		// $date = new DateTime($last->timestamps ?? "2019-01-01");
-		// $current = time();
-		$usdData = file_get_contents("https://cbu.uz/uz/arkhiv-kursov-valyut/json/$request->data/");
-		/*if (($current - $date->getTimestamp()) >= 604800) {
-			if ($usdData != null) {
-				DB::table('currencies')->insert(
-					['name' => $request, 'value' => $usdData]
-				);
-			}
-		}*/
-		// dd($usdData);
-		// file_put_contents("E:/OSPanel/domains/custom-admin-panel/public/usd.json", json_encode($usdData, JSON_UNESCAPED_UNICODE));
+		$post = Post::whereId($id)->with('author.organization.media_channels')->withTranslations($locale)->first();
+		$posts = Post::latest()->take(4)->withTranslations($locale)->get();
+		$other_posts = Post::latest()->take(4)->withTranslations($locale)->get();
+        $regions = \App\UzRegion::all();
 
-		return json_encode($usdData);
+		return view('pages/single_post', compact('post', 'posts', 'other_posts', 'regions'));
 	}
 
+	public function getRegions(Request $request)
+    {
+        $regions = \App\UzRegion::all();
+
+        return response()->json($regions, 200);
+    }
+
+	public function getFilteredPosts(Request $request)
+    {
+        $locale = app()->getLocale();
+        $posts = Post::latest();
+        $categories = [];
+        $organizations = [];
+        if ($request->cats) {
+            $posts = $posts->whereHas('categories', function (Builder $query) use($request) {
+                $query->whereIn('category_id', $request->cats);
+            });
+        }
+
+        if ($request->orgs) {
+            $posts = $posts->whereHas('author.organization', function (Builder $query) use($request) {
+                $query->whereIn('id', $request->orgs);
+            });
+        }
+
+        if ($request->regionId) {
+            $posts = $posts->whereHas('author.organization', function (Builder $query) use($request) {
+                $query->where('region', $request->regionId);
+            });
+        }
+
+        $result = $posts->with('categories', 'author.organization.oblast')->withTranslations($locale)->latest()->get();
+        // dd($result);
+        return response()->json($result, 200);
+    }
 
 }

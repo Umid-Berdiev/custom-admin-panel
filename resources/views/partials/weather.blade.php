@@ -1,29 +1,21 @@
-<div id="weather-widget" class="weather">
-	<div class="weatherIco"><img src="//openweathermap.org/img/w/03d.png" alt=""></div>
-	<div class="weatherData">
-		<div class="weatherT">
-			<span class="sign">+</span><strong class="temp">28</strong><small>°C</small>
-		</div>
-		<div class="wRegions">
-			<div class="WRSelected" onclick="toggleDropdown()">
-				<span>Toshkent</span>
-			</div>
-			<ul id="regionNames" class="d-none">
-				<li><a href="#" data-temp="31" data-sign="+" data-icon="02d">Andijon</a></li>
-				<li><a href="#" data-temp="29" data-sign="+" data-icon="10d">Buxoro</a></li>
-				<li><a href="#" data-temp="30" data-sign="+" data-icon="10d">Farg'ona</a></li>
-				<li><a href="#" data-temp="27" data-sign="+" data-icon="10d">Jizzakh</a></li>
-				<li><a href="#" data-temp="32" data-sign="+" data-icon="02d">Namangan</a></li>
-				<li><a href="#" data-temp="29" data-sign="+" data-icon="04d">Navoiy</a></li>
-				<li><a href="#" data-temp="27" data-sign="+" data-icon="04d">Nukus</a></li>
-				<li><a href="#" data-temp="28" data-sign="+" data-icon="10d">Qarshi</a></li>
-				<li><a href="#" data-temp="25" data-sign="+" data-icon="10d">Samarqand</a></li>
-				<li><a href="#" data-temp="29" data-sign="+" data-icon="03d">Sirdaryo</a></li>
-				<li><a href="#" data-temp="33" data-sign="+" data-icon="10d">Termiz</a></li>
-				<li><a href="#" data-temp="28" data-sign="+" data-icon="03d">Toshkent</a></li>
-				<li><a href="#" data-temp="28" data-sign="+" data-icon="03d">Toshkent v.</a></li>
-				<li><a href="#" data-temp="28" data-sign="+" data-icon="04d">Urgench</a></li>
-			</ul>
-		</div>
-	</div>
+<div id="weather-widget" class="">
+    <div v-if="weatherData" class="row h-100">
+        <div v-if="weatherIsLoading" class="spinner-grow" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div v-if="weatherData.weather && weatherData.main" class="col-auto my-auto">
+            <img :src=`//openweathermap.org/img/w/${weatherData.weather[0].icon}.png` alt="">
+            <span v-if="weatherData.main.temp > 0" class="">+</span><strong class="temp" v-text="weatherData.main.temp"></strong><small>°C</small>
+        </div>
+        <div class="col-auto my-auto">
+            <select class="custom-select custom-select-sm" v-model="cityName" @change="getWeatherData(cityName)">
+                <option v-for="region in regions"
+                    v-if="region.id != 1"
+                    :key="region.id"
+                    :value="region.admincenterUz"
+                    v-text="region.admincenterRu">
+                </option>
+            </select>
+        </div>
+    </div>
 </div>

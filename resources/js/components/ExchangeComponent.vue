@@ -17,29 +17,39 @@
 	const USD = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/';
 	// const EUR = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/EUR/';
 	// const RUB = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/RUB/';
-	// const USD = '/get_currency/USD';
 	const URL = 'https://api/entries';
 	export default {
+        name: 'ExchangeComponent',
 
 		data() {
 			return {
 				usd: null,
 				eur: null,
-				rub: null
+                rub: null,
+                info: null,
+                posts: null
 			}
 		},
 
 		methods: {
-			/*async getData(url) {
-				const response = await axios.get(url);
-				return await response.data;
+			async getData(url) {
+				const response = await axios.get({
+                    url: 'https://jsonplaceholder.typicode.com/posts',
+                    // crossDomain: true,
+                    mode: 'no-cors',
+                    // responseType: 'json',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                });
+                this.posts = await response.data;
 			},
-*/
 		},
 
 		mounted() {
-			console.log('Component mounted');
-			// console.log(this.getData(USD));
+			console.log('Component mounted from ExcahngeComponent');
+            this.getData(USD);
+            
 		}
 	}
 </script>

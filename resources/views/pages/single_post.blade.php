@@ -55,16 +55,16 @@
 			</div>
 		</div>
 		<div class="col-4">
-            <div class="bg-info text-center text-white py-3">
-                <h5 class="my-1">{{ __('Карточка пресс-службы') }}</h5>
-            </div>
-            <div class="org-cart shadow">
-                <div class="media p-2" style="background-color: #e1e1e1;">
-                    <img class="align-self-center mx-2" src="{{ Voyager::image($post->author->organization->logo) }}" alt="organization logo" width="50">
-                    <div class="media-body text-center">
-                        <h6 class="mt-3">{!! $post->author->organization->getTranslatedAttribute('name', app()->getLocale()) !!}</h6>
-                    </div>
-                </div>
+			<div class="bg-info text-center text-white py-3">
+				<h5 class="my-1">{{ __('Карточка пресс-службы') }}</h5>
+			</div>
+			<div class="org-cart shadow">
+				<div class="media p-2" style="background-color: #e1e1e1;">
+					<img class="align-self-center mx-2" src="{{ Voyager::image($post->author->organization->logo) }}" alt="organization logo" width="50">
+					<div class="media-body text-center">
+						<h6 class="mt-3">{!! $post->author->organization->getTranslatedAttribute('name', app()->getLocale()) !!}</h6>
+					</div>
+				</div>
 				<div class="row no-gutters p-3 border-bottom">
 					<div class="row w-100">
 						<div class="col-2 text-right"><i class="fas fa-file-alt"></i></div>
@@ -90,27 +90,30 @@
 					</div>
 				</div>
 				<div class="row no-gutters p-3  justify-content-center text-center">
-					{{ $post->author->organization->website }}
+					<a href="{{ $post->author->organization->website }}">{{ $post->author->organization->website }}</a>
 					<div class="col-12">
-						<a href="#"><i class="fab fa-facebook-square fa-lg"></i></a>
-						<a href="#"><i class="fab fa-instagram fa-lg"></i></a>
-						<a href="#"><i class="fab fa-telegram fa-lg"></i></a>
-						<a href="#"><i class="fab fa-youtube fa-lg"></i></a>
+						@foreach($post->author->organization->media_channels as $channel)
+							<a href="{{ $channel->url }}">
+								<span style="color: dodgerblue;">
+									<i class="{{ $channel->icon }} fa-lg"></i>
+								</span>
+							</a>
+						@endforeach
 					</div>
 				</div>
 			</div>
-            <br>
+			<br>
 			<div class="container mb-3 shadow p-0">
 				<div class="bg-danger text-center py-3">
 					<h5 class="text-white">{{ __('Популярные новости пресс-службы') }}</h5>
 				</div>
 				@foreach($posts as $post)
-				<a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
+				<a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}">
 					<div class="media p-3" style="border: 1px solid lightgrey;">
 						<img src="{{ Voyager::image($post->image) }}" class="mr-3 rounded-circle" alt="post-image" width="75" height="75">
 						<div class="media-body">
 							<h5 class="mt-0">{{ $post->title}}</h5>
-							<p>{{ $post->excerpt }}</p>
+							{{-- <p>{{ $post->excerpt }}</p> --}}
 						</div>
 					</div>
 				</a>
@@ -133,12 +136,12 @@
 	<div class="card-deck">
 		@foreach($other_posts as $post)
 		<div class="card shadow-sm">
-		    <a class="text-muted text-decoration-none" href="{{ route('single-post-show', [$post->id, App::getLocale()]) }}">
-		    	<img src="{{ Voyager::image($post->image) }}" class="card-img-top" alt="post image">
-		    	<div class="card-body">
-		    	  <p class="card-text">{{ $post->excerpt }}</p>
-		    	</div>
-		    </a>
+			<a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}">
+				<img src="{{ Voyager::image($post->image) }}" class="card-img-top" alt="post image">
+				<div class="card-body">
+				  <p class="card-text">{{ $post->title }}</p>
+				</div>
+			</a>
 		  </div>
 		@endforeach
 	</div>
