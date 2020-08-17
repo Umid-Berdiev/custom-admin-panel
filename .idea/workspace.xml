@@ -49,9 +49,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4da1bce4-3fc7-4709-89d6-d89f2277ac2a" name="Default Changelist" comment="from kibera, some updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/WeatherComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WeatherComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/main_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/main_menu.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +225,8 @@
       <workItem from="1592223817196" duration="585000" />
       <workItem from="1592290599105" duration="1876000" />
       <workItem from="1592308343908" duration="3770000" />
-      <workItem from="1592636278543" duration="7523000" />
+      <workItem from="1592636278543" duration="7663000" />
+      <workItem from="1593232433816" duration="20000" />
     </task>
     <task id="LOCAL-00001" summary="from kibera, some updates">
       <created>1592647799096</created>
