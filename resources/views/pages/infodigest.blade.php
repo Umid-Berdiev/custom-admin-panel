@@ -111,7 +111,7 @@
                     </div>
                     <br>
                     <div class="">
-                        <a v-for="post in filteredPosts" :key="post.id" class="text-muted text-decoration-none" :href=`/pages/single_post/${post.id}/{{ app()->getLocale() }}`>
+                        <a v-for="post in filteredPosts" :key="post.id" class="text-muted text-decoration-none" :href=`/single_post/${post.id}/{{ app()->getLocale() }}`>
                             <div class="media mb-3 p-3 border border-light" style="box-shadow: 2px 2px 5px #ccc;">
                                 <img :src="'/storage/' + post.image" class="mr-3" alt="post-image" width="150">
                                 <div class="media-body">
