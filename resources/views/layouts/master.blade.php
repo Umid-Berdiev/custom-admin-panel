@@ -134,13 +134,17 @@
                 },
 
                 fetchCovi19Data() {
-                    axios("https://api.covid19api.com/summary")
+                    axios("https://cors-anywhere.herokuapp.com/https://api.covid19api.com/summary")
                         .then(response => {
                             localStorage.covid19Data = JSON.stringify(response.data);
                             this.covid19DataGlobal = response.data.Global;
                             this.covid19DataLocal = response.data.Countries.filter(item => item.CountryCode == "UZ")[0];
                         })
-                        .catch(e => console.log("covid19 data fetching error: ", e));
+                        .catch(e => {
+                            console.log("covid19 data fetching error: ", e);
+                            this.covid19DataGlobal = JSON.parse(localStorage.covid19Data).Global;
+                            this.covid19DataLocal = JSON.parse(localStorage.covid19Data).Countries.filter(item => item.CountryCode == "UZ")[0];
+                        });
                 },
 
                 getLastTuesdayDate() {
@@ -215,8 +219,9 @@
 
     @yield('infodigest-vue-scripts')
     @yield('locals-vue-scripts')
-	@yield('swiper-scripts')
+	{{-- @yield('swiper-scripts') --}}
 	@yield('digest-vue-scripts')
+	@yield('directory-vue-scripts')
 
 </body>
 </html>

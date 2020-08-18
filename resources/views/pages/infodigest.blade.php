@@ -124,6 +124,9 @@
                             <a href="{{ route('posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
                         </div> --}}
                     </div>
+                    <div class="row">
+                        {{-- {{ $result->links() }} --}}
+                    </div>
                 </template>
 			</div>
 		</div>
@@ -136,10 +139,10 @@
             el:'#infodigest',
             data() {
                 return {
-                    organizations: [],
                     categories: [],
-                    selectedOrgs: [],
+                    organizations: [],
                     selectedCats: [],
+                    selectedOrgs: [],
                     filteredPosts: [],
                     isLoading: true,
                     inputDate1: null,
@@ -196,9 +199,11 @@
                 }
             },
             mounted() {
-                this.organizations = {!! json_encode($orgs, JSON_UNESCAPED_UNICODE) !!}
                 this.categories = {!! json_encode($categories, JSON_UNESCAPED_UNICODE) !!}
+                this.organizations = {!! json_encode($organizations, JSON_UNESCAPED_UNICODE) !!}
                 this.filteredPosts = {!! json_encode($result, JSON_UNESCAPED_UNICODE) !!}
+                this.selectedCats = {!! json_encode($selectedCats, JSON_UNESCAPED_UNICODE) !!}
+                this.selectedOrgs = {!! json_encode($selectedOrgs, JSON_UNESCAPED_UNICODE) !!}
                 this.isLoading = false;
                 this.datePickerFunc();
             }

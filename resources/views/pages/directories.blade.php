@@ -1,18 +1,23 @@
 @extends('layouts.master')
 
 @section('content')
-	<div class="container mb-3">
+	<div id="directory" class="container mb-3">
 		<div class="row">
 			<div class="col-3">
 				<div class="border-bottom border-danger">
                     <h4 class="text-uppercase">{{ __('Директория') }}</h4>
                 </div>
                 <br>
-                <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action active d-flex justify-content-between align-items-center" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Министерства <i class="fas fa-chevron-right"></i></a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Комитеты <i class="fas fa-chevron-right"></i></a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Агенства <i class="fas fa-chevron-right"></i></a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Ассоциации <i class="fas fa-chevron-right"></i></a>
+                <div class="list-group" 
+                    role="tablist" 
+                    v-for="cat in orgCategory.children"
+                    :id="'list-tab' + cat.id" 
+                >
+                    <button class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
+                        @click.prevent="clickedCategory(cat.id, $event)"
+                    >
+                        @{{ cat.name }} <span class="badge badge-primary badge-pill" v-text="cat.organizations.length"></span>
+                    </button>
                 </div>
 			</div>
 			<div class="col-9">
@@ -21,58 +26,88 @@
                 </div>
                 <br>
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="org-cart shadow">
-                                    <div class="media p-2" style="background-color: #e1e1e1;">
-                                        <img class="align-self-center mx-2" src="{{ asset('/images/logo-minzdrav.png') }}" alt="organization logo" width="50">
-                                        <div class="media-body text-center">
-                                            <h6 class="mt-1">Министерство обороны Республики Узбекистан</h6>
-                                        </div>
+                    <div class="row">
+                        <div class="col-4 mb-3" v-for="org in organizations">
+                            <div class="org-cart shadow">
+                                <div class="media p-2" style="background-color: #e1e1e1;">
+                                    <img class="align-self-center mx-2" :src=`/storage/${org.logo}` alt="organization logo" width="50">
+                                    <div class="media-body text-center">
+                                        <h6 class="mt-1" v-text="org.name"></h6>
                                     </div>
-                                    <div class="row no-gutters p-3 border-bottom">
-                                        <div class="row w-100">
-                                            <div class="col-2 text-right"><i class="fas fa-file-alt"></i></div>
-                                            <div class="col-7"><span>{{ __('Количество новостей') }}</span></div>
-                                            <div class="col-3"><span>10978</span></div>
-                                        </div>
-                                        <div class="row w-100">
-                                            <div class="col-2 text-right"><i class="fas fa-chart-line"></i></div>
-                                            <div class="col-7"><span>{{ __('Рейтинг') }}</span></div>
-                                            <div class="col-2">12</div>
-                                        </div>
+                                </div>
+                                <div class="row no-gutters p-3 border-bottom">
+                                    <div class="row w-100">
+                                        <div class="col-2 text-right"><i class="fas fa-file-alt"></i></div>
+                                        <div class="col-7"><span>{{ __('Количество новостей') }}</span></div>
+                                        <div class="col-3"><span v-text="org.user.posts.length"></span></div>
                                     </div>
-                                    <div class="row no-gutters p-3 border-bottom">
-                                        <div class="row w-100">
-                                            <div class="col-2 text-right"><i class="fas fa-eye"></i></div>
-                                            <div class="col-7"><span>{{ __('Средний просмотр') }}</span></div>
-                                            <div class="col-2">1983</div>
-                                        </div>
-                                        <div class="row w-100">
-                                            <div class="col-2 text-right"><i class="fas fa-chart-line"></i></div>
-                                            <div class="col-7"><span>{{ __('Рейтинг просмотров') }}</span></div>
-                                            <div class="col-2">16</div>
-                                        </div>
+                                    <div class="row w-100">
+                                        <div class="col-2 text-right"><i class="fas fa-chart-line"></i></div>
+                                        <div class="col-7"><span>{{ __('Рейтинг') }}</span></div>
+                                        <div class="col-2">12</div>
                                     </div>
-                                    <div class="row no-gutters p-3  justify-content-center text-center">
-                                        www.mudofaa.uz
-                                        <div class="col-12">
-                                            <a href="#"><i class="fab fa-facebook-square fa-lg"></i></a>
+                                </div>
+                                <div class="row no-gutters p-3 border-bottom">
+                                    <div class="row w-100">
+                                        <div class="col-2 text-right"><i class="fas fa-eye"></i></div>
+                                        <div class="col-7"><span>{{ __('Средний просмотр') }}</span></div>
+                                        <div class="col-2">1983</div>
+                                    </div>
+                                    <div class="row w-100">
+                                        <div class="col-2 text-right"><i class="fas fa-chart-line"></i></div>
+                                        <div class="col-7"><span>{{ __('Рейтинг просмотров') }}</span></div>
+                                        <div class="col-2">16</div>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters p-3  justify-content-center text-center">
+                                    @{{ org.website }}
+                                    <div class="col-12">
+                                        <template v-if="org.media_channels.length > 0">
+                                            <a class="mr-1" v-for="ch in org.media_channels" :href="ch.url">
+                                                <i :class="ch.icon + ' fa-lg'"></i>
+                                            </a>
+                                        </template>
+                                        <template v-else>
+                                            <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
+                                            <a href="#"><i class="fab fa-youtube-square fa-lg"></i></a>
                                             <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
                                             <a href="#"><i class="fab fa-telegram fa-lg"></i></a>
-                                            <a href="#"><i class="fab fa-youtube fa-lg"></i></a>
-                                        </div>
+                                        </template>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">2</div>
-                    <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">3</div>
-                    <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">4</div>
                 </div>
 			</div>
 		</div>
 	</div>
+@endsection
+
+@section('directory-vue-scripts')
+    <script>
+        let directoryApp = new Vue({
+            el:'#directory',
+            data() {
+                return {
+                    organizations: [],
+                    orgCategory: [],
+                    selectedCat: {},
+                    isLoading: true,
+                }
+            },
+            methods: {
+                clickedCategory(value, el) {
+                    this.selectedCat = this.orgCategory.children.find(item => item.id == value);
+                    this.organizations = this.selectedCat.organizations;
+                }
+            },
+            mounted() {
+                this.organizations = {!! json_encode($orgs, JSON_UNESCAPED_UNICODE) !!};
+                this.orgCategory = {!! json_encode($org_category, JSON_UNESCAPED_UNICODE) !!};
+                this.isLoading = false;
+
+            },
+        })
+    </script>
 @endsection

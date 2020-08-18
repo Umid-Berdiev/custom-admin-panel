@@ -6,8 +6,7 @@
 		<div class="col-8 shadow">
 			<div class="row mx-2 mt-3 no-gutters border-bottom border-danger mb-3 justify-content-between">
 				<div class="col-12">
-					<h4>{{ $post->title }}</h4>
-					{{-- <h4>{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</h4> --}}
+					<h4>{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</h4>
 				</div>
 				<div class="col-auto">
 					<p class="small">
@@ -113,7 +112,6 @@
 						<img src="{{ Voyager::image($post->image) }}" class="mr-3 rounded-circle" alt="post-image" width="75" height="75">
 						<div class="media-body">
 							<h5 class="mt-0">{{ $post->title}}</h5>
-							{{-- <p>{{ $post->excerpt }}</p> --}}
 						</div>
 					</div>
 				</a>

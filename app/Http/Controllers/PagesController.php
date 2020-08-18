@@ -36,7 +36,7 @@ class PagesController extends Controller
 		$posts = Post::with('categories', 'author.organization.oblast')->withTranslations($locale)->latest()->take(6)->get();
 		$categories = Category::with('posts')->withTranslations($locale)->get();
 		$post_categories = Category::where('parent_id', 4)->withTranslations($locale)->get();
-        $orgs = Organization::with('users', 'media_channels')->withTranslations($locale)->get();
+        $orgs = Organization::with('user', 'media_channels')->withTranslations($locale)->get();
         $regions = \App\UzRegion::all();
 
 		return view('pages.home', compact(
@@ -51,19 +51,24 @@ class PagesController extends Controller
     public function directoriesPage(Request $request, $locale)
     {
         $regions = \App\UzRegion::all();
+        $orgs = Organization::with('user', 'media_channels')->withTranslations($locale)->get();
+        $org_category = Category::whereId(18)
+            ->with(['children.organizations.media_channels', 'children.organizations.user'])
+            ->withTranslations($locale)->first();
 
-        return view('pages.directories', compact('regions'));
+        return view('pages.directories', compact('regions', 'org_category', 'orgs'));
 	}
 
     public function infodigestPage(Request $request, $locale)
     {
-        // $posts = Post::with('categories', 'author')->withTranslations($locale)->latest()->get();
         $categories = Category::where('parent_id', 4)->with('posts')->withTranslations($locale)->get();
-        $orgs = Organization::with('users', 'media_channels')->withTranslations($locale)->get();
+        $organizations = Organization::with('user', 'media_channels')->withTranslations($locale)->get();
         $regions = \App\UzRegion::all();
-        $result = [];
+        $result = Post::with('categories', 'author')->withTranslations($locale)->latest()->get();
+        $selectedCats = [];
+        $selectedOrgs = [];
 
-        return view('pages.infodigest', compact('categories', 'orgs', 'regions', 'result'));
+        return view('pages.infodigest', compact('categories', 'organizations', 'regions', 'result', 'selectedCats', 'selectedOrgs'));
     }
 
     public function postsPage(Request $request, $locale)
@@ -80,8 +85,10 @@ class PagesController extends Controller
 		$posts = Post::latest()->take(4)->withTranslations($locale)->get();
 		$other_posts = Post::latest()->take(4)->withTranslations($locale)->get();
         $regions = \App\UzRegion::all();
+        $orgs = Organization::with('user', 'media_channels')->withTranslations($locale)->get();
+		$post_categories = Category::where('parent_id', 4)->withTranslations($locale)->get();
 
-		return view('pages/single_post', compact('post', 'posts', 'other_posts', 'regions'));
+		return view('pages.single_post', compact('post', 'posts', 'other_posts', 'regions', 'orgs', 'post_categories'));
 	}
 
 	public function getRegions(Request $request)
@@ -125,39 +132,39 @@ class PagesController extends Controller
 	public function redirectFromHomeToInfodigest(Request $request)
     {
         $req = array_filter($request->all());
-        dd($req);
-
-        if ($req) {
-            $posts = Post::latest();
-            $categories = [];
-            $organizations = [];
-            if ($request->cats) {
-                $posts = $posts->whereHas('categories', function (Builder $query) use($request) {
-                    $query->whereIn('category_id', $request->cats);
-                });
-            }
-    
-            if ($request->orgs) {
-                $posts = $posts->whereHas('author.organization', function (Builder $query) use($request) {
-                    $query->whereIn('id', $request->orgs);
-                });
-            }
-    
-            if ($request->regionId) {
-                $posts = $posts->whereHas('author.organization', function (Builder $query) use($request) {
-                    $query->where('region', $request->regionId);
-                });
-            }
-    
-            $result = $posts->with('categories', 'author.organization.oblast')->withTranslations($locale)->latest()->get();
+        $locale = app()->getLocale();
+        $result = [];
+        $selectedCats = $request->selectedCats;
+        $selectedOrgs = $request->selectedOrgs;
+        $posts = Post::latest();
+        $categories = [];
+        $organizations = [];
+        
+        if ($selectedCats) {
+            $posts = $posts->whereHas('categories', function (Builder $query) use($selectedCats) {
+                $query->whereIn('category_id', $selectedCats);
+            });
         }
 
-        // $posts = Post::with('categories', 'author')->withTranslations($locale)->latest()->get();
-        $categories = Category::where('parent_id', 4)->with('posts')->withTranslations($locale)->get();
-        $orgs = Organization::with('users', 'media_channels')->withTranslations($locale)->get();
-        $regions = \App\UzRegion::all();
+        if ($selectedOrgs) {
+            $posts = $posts->whereHas('author.organization', function (Builder $query) use($selectedOrgs) {
+                $query->whereIn('id', $selectedOrgs);
+            });
+        }
 
-        return view('pages.infodigest', compact('categories', 'orgs', 'regions', 'result'));
+        if ($request->regionId) {
+            $posts = $posts->whereHas('author.organization', function (Builder $query) use($request) {
+                $query->where('region', $request->regionId);
+            });
+        }
+
+        $result = $posts->with('categories', 'author.organization.oblast')->withTranslations($locale)->latest()->get();
+        
+        $categories = Category::where('parent_id', 4)->with('posts')->withTranslations($locale)->get();
+        $organizations = Organization::with('user', 'media_channels')->withTranslations($locale)->get();
+        $regions = \App\UzRegion::all();
+        
+        return view('pages.infodigest', compact('posts', 'categories', 'organizations', 'regions', 'result', 'selectedCats', 'selectedOrgs'));
         
     }
 

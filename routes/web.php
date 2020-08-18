@@ -26,14 +26,14 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['middleware' => 'setlocale'], function () {
 	Route::get('/{locale}', 'PagesController@homePage')->name('home.page');
-	Route::get('pages/posts/{locale}', 'PagesController@postsPage')
+	Route::get('posts/{locale}', 'PagesController@postsPage')
 		->name('posts');
-	Route::get('pages/single_post/{id}/{locale}', 'PagesController@singlePostPage')
+	Route::get('single_post/{id}/{locale}', 'PagesController@singlePostPage')
 		->name('single-post-page');
-	Route::get('pages/directories/{locale}', 'PagesController@directoriesPage')
+	Route::get('directories/{locale}', 'PagesController@directoriesPage')
 		->name('directories-page');
-	Route::get('pages/infodigest/{locale}', 'PagesController@infodigestPage')
+	Route::get('infodigest/{locale}', 'PagesController@infodigestPage')
 		->name('infodigest-page');
-	Route::post('pages/infodigest/{locale}', 'PagesController@redirectFromHomeToInfodigest')
-		->name('from-home-to-infodigest');
+	Route::post('infodigest/{locale}', 'PagesController@redirectFromHomeToInfodigest')
+		->name('filtered_posts_from_home');
 });

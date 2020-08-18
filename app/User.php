@@ -44,6 +44,6 @@ class User extends \TCG\Voyager\Models\User
 
     public function posts()
     {
-        return $this->hasMany('App\Posts', 'author_id', 'id');
+        return $this->hasMany('App\Post', 'author_id', 'id');
     }
 }

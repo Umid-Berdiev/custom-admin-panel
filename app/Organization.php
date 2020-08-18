@@ -11,9 +11,9 @@ class Organization extends Model
 
 	protected $translatable = ['name', 'description'];
 
-	public function users()
+	public function user()
 	{
-		return $this->hasMany('App\User');
+		return $this->hasOne('App\User')->with('posts');
 	}
 
 	public function media_channels()

@@ -17,4 +17,19 @@ class Category extends Model
 	{
 		return $this->belongsToMany('App\Post')->latest();
 	}
+
+	public function parent()
+	{
+		return $this->belongsTo('App\Category');
+	}
+
+	public function children()
+	{
+		return $this->hasMany('App\Category', 'parent_id', 'id');
+	}
+
+	public function organizations()
+	{
+		return $this->hasMany('App\Organization', 'category_id', 'id');
+	}
 }
