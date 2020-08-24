@@ -62,12 +62,12 @@
                             </label>
                             <input id="datePicker" class="ml-auto" type="date" /> --}}
                             <div class="col-4">
-                                <label for="inputDate1" class="col-form-label btn btn-link">{{ __('Период') }}</label>			
+                                <label for="inputDate1" class="col-form-label btn btn-link">{{ __('Период') }}</label>
                             </div>
                             <div class="col-8">
                                 <div class="row">
                                     <div class="col">
-                                        <label for="inputDate1" class="col-form-label">{{ __('с') }}</label>			
+                                        <label for="inputDate1" class="col-form-label">{{ __('с') }}</label>
                                         <input type="date" id="inputDate1" v-model="inputDate1">
                                     </div>
                                     <div class="col">
@@ -112,7 +112,7 @@
                     <br>
                     <div class="">
                         <a v-for="post in filteredPosts" :key="post.id" class="text-muted text-decoration-none" :href=`/single_post/${post.id}/{{ app()->getLocale() }}`>
-                            <div class="media mb-3 p-3 border border-light" style="box-shadow: 2px 2px 5px #ccc;">
+                            <div class="media mb-3 p-3 border border-light posts-list">
                                 <img :src="'/storage/' + post.image" class="mr-3" alt="post-image" width="150">
                                 <div class="media-body">
                                     <h5 class="mt-0" v-text="post.title"></h5>
@@ -188,12 +188,12 @@
 					let pastDay = '01';
 					let pastMonth = (pastDate.getMonth() + 1) < 10 ? "0" + (pastDate.getMonth() + 1) : (pastDate.getMonth() + 1);
 					let pastYear = pastDate.getFullYear();
-					
+
 					let curDate = new Date();
 					let curDay = curDate.getDate() < 10 ? "0" + curDate.getDate() : curDate.getDate();
 					let curMonth = (curDate.getMonth() + 1) < 10 ? "0" + (curDate.getMonth() + 1) : (curDate.getMonth() + 1);
 					let curYear = curDate.getFullYear();
-					
+
 					this.inputDate1 = `${pastYear}-${pastMonth}-${pastDay}`;
 					this.inputDate2 = `${curYear}-${curMonth}-${curDay}`;
                 }

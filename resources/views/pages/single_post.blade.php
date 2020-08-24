@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mb-3">
 	<div class="row single-post-block">
-		<div class="col-8 shadow">
+		<div class="col-8 shadow bg-white">
 			<div class="row mx-2 mt-3 no-gutters border-bottom border-danger mb-3 justify-content-between">
 				<div class="col-12">
 					<h4>{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</h4>

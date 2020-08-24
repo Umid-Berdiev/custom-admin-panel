@@ -472,3 +472,7 @@ ul li {
     background-color: unset;
 }
 
+.posts-list {
+    box-shadow: 2px 2px 5px #ccc;
+    background-color: #ffffff;
+}

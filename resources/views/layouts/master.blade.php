@@ -217,9 +217,9 @@
 
     </script>
 
+    @yield('presscenter-news-vue-scripts')
     @yield('infodigest-vue-scripts')
     @yield('locals-vue-scripts')
-	{{-- @yield('swiper-scripts') --}}
 	@yield('digest-vue-scripts')
 	@yield('directory-vue-scripts')
 

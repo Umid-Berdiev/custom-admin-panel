@@ -8,12 +8,12 @@
                     <h4 class="text-uppercase">{{ __('Директория') }}</h4>
                 </div>
                 <br>
-                <div class="list-group" 
-                    role="tablist" 
+                <div class="list-group"
+                    role="tablist"
                     v-for="cat in orgCategory.children"
-                    :id="'list-tab' + cat.id" 
+                    :id="'list-tab' + cat.id"
                 >
-                    <button class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
+                    <button class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                         @click.prevent="clickedCategory(cat.id, $event)"
                     >
                         @{{ cat.name }} <span class="badge badge-primary badge-pill" v-text="cat.organizations.length"></span>
@@ -28,7 +28,7 @@
                 <div class="tab-content" id="nav-tabContent">
                     <div class="row">
                         <div class="col-4 mb-3" v-for="org in organizations">
-                            <div class="org-cart shadow">
+                            <div class="org-cart shadow bg-white">
                                 <div class="media p-2" style="background-color: #e1e1e1;">
                                     <img class="align-self-center mx-2" :src=`/storage/${org.logo}` alt="organization logo" width="50">
                                     <div class="media-body text-center">

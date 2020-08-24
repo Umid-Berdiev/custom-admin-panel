@@ -1,5 +1,16 @@
 @extends('layouts.master')
 
+@section('custom-css')
+    <style>
+        .categories {
+            background-color: #ffffff;
+        }
+        .mySlides {
+            display: none;
+        }
+    </style>
+@endsection
+
 @section('content')
 <div class="container mb-3">
     <br>
@@ -8,87 +19,13 @@
             <h2 class="text-uppercase">{{ __('Последние новости') }}</h2>
         </div>
 
-        <!-- Slideshow container -->
-        <div class="col-8 slideshow-container">
-            <!-- Full-width images with number and caption text -->
-            @foreach($posts as $key => $post)
-            <div class="mySlides">
-                <a href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}" title="{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}">
-                    <img src="{{ Voyager::image($post->image) }}" width="100%" />
-                </a>
-            </div>
-            @endforeach
-            <button class="btn btn-sm btn-outline-danger position-absolute play-btn" onclick="togglePlay()">
-                <i id="play-resume" class="fas fa-pause-circle fa-2x"></i>
-            </button>
-        </div>
-        <div class="col-4">
-            <div class="homenews_feed">
-                <ul>
-                    @foreach($posts as $key => $post)
-                    <li class="row mob_newsfeed">
-                        <div class="mob-newsfeed-7">
-                            <div class="homenews_feed_time"><span class="visible-xs">{{ $post->created_at->format('d.m.Y') }} </span>{{ $post->created_at->format('h:m') }}</div>
-                            <a class="homenews-feed-btn" href="javascript:void(0);" onclick="currentSlide({{ $key + 1 }})">
-                                <div class="homenews_feed_ico hidden-xs empty"></div>
-                                <div class="homenews_feed_text">
-                                    <p>{!! $post->getTranslatedAttribute('title', app()->getLocale()) !!}</p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    @endforeach
-                </ul>
-                <div class="feed-btn">
-                    <a href="{{ route('posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary ml-5">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-        <!-- Slideshow container -->
+        @include('partials.home-news-slider')
     </div>
     <br>
-    <div class="row press-center-news-block">
-        <div class="col-8">
-            <div class="mb-3" style="border-bottom: 1px solid red">
-                <h2 class="text-uppercase">{{ __('Сообщения пресс-центра') }}</h2>
-            </div>
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-auto">
-                        <select class="custom-select">
-                            <option selected>{{ __('Все пресс-службы') }}</option>
-                            @foreach($orgs as $org)
-                            <option value="{{ $org->id }}">{{ $org->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-auto">
-                        <select class="custom-select">
-                            <option selected>{{ __('Все рубрики') }}</option>
-                            @foreach($post_categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-            @foreach($posts as $post)
-            <a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}">
-                <div class="media mb-3 p-3 border border-light" style="box-shadow: 2px 2px 5px #ccc;">
-                    <img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="150">
-                    <div class="media-body">
-                        <h5 class="mt-0">{{ $post->title}}</h5>
-                        <p>{{ $post->excerpt }}</p>
-                    </div>
-                </div>
-            </a>
-            @endforeach
-            <div class="feed-btn">
-                <a href="{{ route('posts', app()->getLocale()) }}" class="btn btn-sm btn-outline-secondary">{{ __('Показать ещё') }} <i class="fa fa-angle-down visible-xs" aria-hidden="true"></i></a>
-            </div>
-        </div>
+    <div class="row">
+        @include('partials.presscenter-news-block')
         <div class="col-4">
-            <div class="ml-auto mb-3" style="border-bottom: 1px solid red">
+            <div class="ml-auto mb-3 border-bottom border-danger">
                 <h2 class="text-uppercase">{{ __('Популярное') }}</h2>
             </div>
             <div class="pb-3" style="background-color: #d3d3d36e;">
