@@ -476,3 +476,10 @@ ul li {
     box-shadow: 2px 2px 5px #ccc;
     background-color: #ffffff;
 }
+
+/* .wrapText {
+    max-width: 150px;
+    overflow: hidden!important;
+    text-overflow: ellipsis!important;
+    white-space: nowrap;
+} */

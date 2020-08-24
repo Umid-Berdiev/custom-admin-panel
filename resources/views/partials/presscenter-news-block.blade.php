@@ -29,7 +29,9 @@
                 <img :src="'/storage/' + post.image" class="mr-3" alt="post-image" width="150">
                 <div class="media-body">
                     <h5 class="mt-0" v-text="post.title"></h5>
-                    <p v-text="post.excerpt"></p>
+                    <p class="small mb-2"><i class="fas fa-history"></i> @{{ post.created_at }}</p>
+                    <small class="text-primary">@{{ post.author.organization.name }}</small>
+                    {{-- <p v-text="post.excerpt"></p> --}}
                 </div>
             </div>
         </a>

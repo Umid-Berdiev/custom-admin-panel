@@ -1,3 +1,16 @@
+@php
+	function shortenStr($str) {
+		$tempStr = strval($str);
+		$maxLen = 5;
+		$strToArr = explode(" ", $tempStr);
+		if (count($strToArr) > $maxLen) {
+			$getSlicedArr = array_slice($strToArr, 0, $maxLen);
+			$arrToStr = implode(" ", $getSlicedArr);
+			return $arrToStr .= "...";
+		} else return $tempStr;
+	}
+@endphp
+
 @extends('layouts.master')
 
 @section('custom-css')
@@ -28,14 +41,15 @@
             <div class="ml-auto mb-3 border-bottom border-danger">
                 <h2 class="text-uppercase">{{ __('Популярное') }}</h2>
             </div>
-            <div class="pb-3" style="background-color: #d3d3d36e;">
+            <div class="pb-3 bg-white">
                 @foreach($posts as $post)
                 <a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}">
                     <div class="media p-3" style="border: 1px solid lightgrey;">
-                        <img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
+                        <img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100" height="80">
                         <div class="media-body">
-                            <h6 class="mt-0">{{ $post->title}}</h6>
-                            {{-- <p>{{ $post->excerpt }}</p> --}}
+                            <h6 class="mt-0">{{ shortenStr($post->title) }}</h6>
+							<p class="small mb-2"><i class="fas fa-history"></i> {{ $post->created_at->format('d-m-Y') }}</p>
+							<small class="text-primary">{{ $post->author->organization->name }}</small>
                         </div>
                     </div>
                 </a>
@@ -94,7 +108,7 @@
 						@if($key === 0)
 						<a class="text-muted text-decoration-none" href="{{ route('single-post-page', [$post->id, App::getLocale()]) }}">
 							<div class="media p-2">
-								<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100">
+								<img src="{{ Voyager::image($post->image) }}" class="mr-3" alt="post-image" width="100" height="80">
 								<div class="media-body">
 									<p class="mb-1">{{ $post->title }}</p>
 									<p class="small mb-2"><i class="fas fa-history"></i> {{ $post->created_at->format('d-m-Y') }}</p>
