@@ -193,8 +193,8 @@ ul li {
 
 .homenews_feed ul li .homenews_feed_time {
     position: absolute;
-    top: 0;
-    left: 10px;
+    top: 2px;
+    left: 0;
 }
 
 .visible-xs {

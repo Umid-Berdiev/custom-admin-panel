@@ -30,7 +30,7 @@
                 <div class="media-body">
                     <h5 class="mt-0" v-text="post.title"></h5>
                     <p class="small mb-2"><i class="fas fa-history"></i> @{{ post.created_at }}</p>
-                    <small class="text-primary">@{{ post.author.organization.name }}</small>
+                    <button class="btn btn-sm btn-outline-primary">@{{ post.author.organization.name }}</button>
                     {{-- <p v-text="post.excerpt"></p> --}}
                 </div>
             </div>
@@ -72,6 +72,9 @@
                             console.log(e)
                             this.arePostsLoading = false;
                         })
+                },
+                dateFormatter(value) {
+                    
                 }
 			},
 

@@ -18,7 +18,7 @@
             @foreach($posts as $key => $post)
             <li class="row mob_newsfeed">
                 <div class="mob-newsfeed-7">
-                    <div class="homenews_feed_time"><span class="visible-xs">{{ $post->created_at->format('d.m.Y') }} </span>{{ $post->created_at->format('h:m') }}</div>
+                    <div class="homenews_feed_time">{{ $post->created_at->format('Y-m-d') == date('Y-m-d') ? $post->created_at->format('h:i') : $post->created_at->format('d-M') }}</div>
                     <a class="homenews-feed-btn" href="javascript:void(0);" onclick="currentSlide({{ $key + 1 }})">
                         <div class="homenews_feed_ico hidden-xs empty"></div>
                         <div class="homenews_feed_text">
